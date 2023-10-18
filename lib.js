@@ -1,16 +1,18 @@
 var scribble = new Scribble();
 var currentScene;
+var buttonWidth = 200;
+var buttonHeight = 50;
 
 function setScene(scene) {
     currentScene = scene;
 }
 
-function buttonFactory(x, y, w, h, text, cb) {
+function buttonFactory(x, y, text, cb) {
     var button = new Clickable();
     button.textScaled = true;
     button.text = text;
     button.locate(x, y);
-    button.resize(w, h);
+    button.resize(buttonWidth, buttonHeight);
     button.onPress = cb;
     return button;
 }

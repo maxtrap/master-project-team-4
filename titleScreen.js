@@ -1,15 +1,12 @@
-const buttonWidth = 200;
-const buttonHeight = 200;
-
 class TitleScreen {
     constructor() {
         background(255, 0, 0);
         this.buttons = [];
         this.buttons.push(
-            buttonFactory(20, 20, buttonWidth, buttonHeight, "yeah", () => {
-                alert("bruh");
+            buttonFactory(20, 20, "yeah", () => {
+                setScene(new FairytaleTapper());
             }),
-            buttonFactory(40, 20, buttonWidth, buttonHeight, "yeah2", () => {
+            buttonFactory(20, 20 + buttonHeight, "yeah2", () => {
                 alert("two");
             })
         );

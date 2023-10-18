@@ -1,9 +1,6 @@
-const TitleScreen = class {
+class TitleScreen {
     constructor() {
         this.buttons = [];
-    }
-
-    setup() {
         background(255, 0, 0);
         this.buttons.push(
             buttonFactory(20, 20, () => {
@@ -24,6 +21,4 @@ const TitleScreen = class {
             b.draw();
         });
     }
-};
-
-var titleScreen = new TitleScreen();
+}

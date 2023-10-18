@@ -1,6 +1,6 @@
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    setScene(titleScreen);
+    setScene(new TitleScreen());
 }
 
 function draw() {

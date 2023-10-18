@@ -3,7 +3,6 @@ var currentScene;
 
 function setScene(scene) {
     currentScene = scene;
-    scene.setup();
 }
 
 function buttonFactory(x, y, cb) {

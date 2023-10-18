@@ -18,7 +18,7 @@ class TitleScreen {
 
         textSize(200);
         textAlign(CENTER, CENTER);
-        text("ABCD", width / 2, height / 2);
+        text("Zoo Zen", width / 2, height / 2);
 
         this.buttons.forEach((b) => {
             b.draw();

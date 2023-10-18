@@ -9,3 +9,8 @@ function draw() {
     background(220);
     currentScene.draw();
 }
+
+function changeScene(scene) {
+    currentScene = scene;
+    scene.setup();
+}

@@ -1,6 +1,6 @@
 function setup() {
     createCanvas(windowWidth, windowHeight);
-    setScene(fairytaleTapper);
+    setScene(titleScreen);
 }
 
 function draw() {

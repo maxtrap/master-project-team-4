@@ -1,4 +1,5 @@
 var scribble = new Scribble();
+var currentScene = titleScreen;
 
 function setup() {
     createCanvas(1600, 900);
@@ -6,5 +7,5 @@ function setup() {
 
 function draw() {
     background(220);
-    scribble.scribbleEllipse(50, 50, 100, 100);
+    currentScene.draw();
 }

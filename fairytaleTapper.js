@@ -1,10 +1,12 @@
-var fairytaleTapper = {
-    setup: () => {
-        background(0);
-    },
 
-    draw: () => {
-        background(0);
-        ellipse(width / 2, height / 2, 50);
-    },
+const FairytaleTapper = class {
+    unicorn = loadImage('resources/unicorn.png');
+
+    constructor() {
+        background(255);
+    }
+
+    draw = () => {
+        image(this.unicorn, width / 2, height / 2, 200, 200);
+    }
 };

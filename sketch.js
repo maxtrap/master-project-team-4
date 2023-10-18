@@ -1,8 +1,9 @@
 var scribble = new Scribble();
-var currentScene = titleScreen;
+var currentScene;
 
 function setup() {
-    createCanvas(1600, 900);
+  createCanvas(windowWidth, windowHeight);
+  setScene(fairytaleTapper);
 }
 
 function draw() {
@@ -10,7 +11,11 @@ function draw() {
     currentScene.draw();
 }
 
-function changeScene(scene) {
+function setScene(scene) {
     currentScene = scene;
     scene.setup();
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
 }

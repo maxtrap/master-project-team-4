@@ -159,6 +159,9 @@ function Clickable(x,y) {
 	this.draw = function () {
 		push();
 		fill(this.color);
+		if (this.color == "nofill") {
+			noFill();
+		}
 		stroke(this.stroke);
 		strokeWeight(this.strokeWeight);
 		rect(this.x, this.y, this.width, this.height, this.cornerRadius);

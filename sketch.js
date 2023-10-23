@@ -5,9 +5,8 @@ function preload() {
 }
 
 function setup() {
-  var canvas = createCanvas(windowWidth, windowHeight);
-  canvas.parent("sketch");
-  setScene(() => new TitleScreen());
+    createCanvas(windowWidth, windowHeight);
+    setScene(new GeckoClimber());
 }
 
 function draw() {

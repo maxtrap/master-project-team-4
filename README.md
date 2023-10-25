@@ -1,3 +1,3 @@
-# master-project-team-4
+# FSE 100 Master Project (Team 4): ZOO ZEN
 
-I love making games and helping people! This app is fun and engaging and will help people!
+We love making games and helping people! This website is a fun and engaging way to accomplish this!

@@ -1,3 +1,7 @@
+function preload() {
+  fairytalePreload();
+}
+
 function setup() {
   var canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("sketch");

@@ -1,6 +1,6 @@
-const RANDOM_INTERVAL_LOW = 3;
-const RANDOM_INTERVAL_HIGH = 5;
-const UNICORN_WIDTH = 100;
+const RANDOM_INTERVAL_LOW = 1;
+const RANDOM_INTERVAL_HIGH = 3;
+const UNICORN_WIDTH = 200;
 const UNICORN_HEIGHT = UNICORN_WIDTH * 89/106;
 
 class FairytaleTapper {
@@ -19,8 +19,8 @@ class FairytaleTapper {
         this.unicorns.forEach(unicorn => {
             unicorn.draw();
         })
-        textSize(32);
-        text(`Score: ${this.score}`, 10, 30);
+        textSize(64);
+        text(`Score: ${this.score}`, 20, 70);
     }
 
     makeUnicorn() {
@@ -31,6 +31,7 @@ class FairytaleTapper {
         unicorn.cornerRadius = 0;
         unicorn.strokeWeight = 0;
         unicorn.text = "";
+        unicorn.color = "nofill"
         
         unicorn.onPress = this.unicornPressed.bind(this, unicorn);
 
@@ -55,9 +56,9 @@ class FairytaleTapper {
 }
 
 function getRandomX() {
-    return Math.floor(Math.random() * (width - UNICORN_WIDTH)) + UNICORN_WIDTH / 2;
+    return Math.floor(Math.random() * (width - UNICORN_WIDTH))
 }
 
 function getRandomY() {
-    return Math.floor(Math.random() * (height - UNICORN_HEIGHT)) + UNICORN_HEIGHT / 2;
+    return Math.floor(Math.random() * (height - UNICORN_HEIGHT))
 }

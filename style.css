@@ -1,8 +1,53 @@
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
 }
 
 canvas {
   display: block;
+}
+
+button {
+  font-size: 24px;
+  margin: 5px;
+  padding: 10px 20px;
+  background-color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#title {
+  text-align: center;
+  font-size: 128px;
+}
+
+#sketch {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+#pauseMenu {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  flex-direction: column;
+  align-items: center;
+}
+
+#pauseMenu > * {
+  text-align: center;
+}
+
+#pauseMenu > h1 {
+  background: white;
 }

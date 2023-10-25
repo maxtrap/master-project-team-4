@@ -1,8 +1,8 @@
 var scribble = new Scribble();
 var currentScene;
-var buttonWidth = 300;
-var buttonHeight = 50;
-var buttonVerticalPadding = 10;
+const buttonWidth = 300;
+const buttonHeight = 50;
+const buttonVerticalPadding = 10;
 
 function setScene(scene) {
   currentScene = scene;
@@ -16,4 +16,13 @@ function buttonFactory(x, y, text, cb) {
   button.resize(buttonWidth, buttonHeight);
   button.onPress = cb;
   return button;
+}
+
+function togglePause() {
+  var pauseMenu = select("#pauseMenu");
+  if (pauseMenu.style("display") === "none") {
+    pauseMenu.style("display", "flex");
+  } else {
+    pauseMenu.style("display", "none");
+  }
 }

@@ -1,5 +1,6 @@
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  var canvas = createCanvas(windowWidth, windowHeight);
+  canvas.parent("sketch");
   setScene(new TitleScreen());
 }
 
@@ -9,4 +10,10 @@ function draw() {
 
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
+}
+
+function keyPressed() {
+  if (keyCode === ESCAPE) {
+    togglePause();
+  }
 }

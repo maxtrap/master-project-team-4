@@ -1,27 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <title>Sketch</title>
+    <title>Sketch</title>
 
-        <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
 
-        <script src="libraries/p5.min.js"></script>
-        <script src="libraries/p5.sound.min.js"></script>
-        <script src="libraries/quicksettings.js"></script>
-        <script src="libraries/p5.gui.js"></script>
-        <script src="libraries/p5.scribble.js"></script>
-        <script src="libraries/p5.clickable.js"></script>
+    <script src="libraries/p5.min.js"></script>
+    <script src="libraries/p5.sound.min.js"></script>
+    <script src="libraries/quicksettings.js"></script>
+    <script src="libraries/p5.gui.js"></script>
+    <script src="libraries/p5.scribble.js"></script>
+    <script src="libraries/p5.clickable.js"></script>
 
-        <script src="lib.js"></script>
-        <script src="titleScreen.js"></script>
-        <script src="fairytaleTapper.js"></script>
-        <script src="geckoClimber.js"></script>
-        <script src="monkeyBonanza.js"></script>
-        <script src="sketch.js"></script>
-    </head>
+    <script src="lib.js"></script>
+    <script src="titleScreen.js"></script>
+    <script src="fairytaleTapper.js"></script>
+    <script src="geckoClimber.js"></script>
+    <script src="monkeyBonanza.js"></script>
+    <script src="sketch.js"></script>
+  </head>
 
-    <body></body>
+  <body>
+    <div id="sketch"></div>
+    <h1 id="title">Zoo ZEN</h1>
+    <div id="pauseMenu">
+      <h1>Paused</h1>
+      <button
+        type="button"
+        onClick="setScene(new TitleScreen()); togglePause()"
+      >
+        Return to title screen
+      </button>
+    </div>
+  </body>
 </html>

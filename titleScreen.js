@@ -22,7 +22,6 @@ var foo = [
 class TitleScreen {
   constructor() {
     frameRate(3);
-    background(255, 0, 0);
     this.buttons = [];
     for (const [i, val] of foo.entries()) {
       this.buttons.push(
@@ -40,12 +39,9 @@ class TitleScreen {
   }
 
   draw() {
+    background(255, 0, 0);
     // randomSeed(0)
-    scribble.scribbleEllipse(width / 2, 125, width, 325);
-
-    textSize(200);
-    textAlign(CENTER, CENTER);
-    text("Zoo Zen", width / 2, 150);
+    scribble.scribbleEllipse(width / 2, 150, width, 325);
 
     this.buttons.forEach((b) => {
       b.draw();

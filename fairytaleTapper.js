@@ -4,11 +4,13 @@ const UNICORN_WIDTH = 200;
 const UNICORN_HEIGHT = UNICORN_WIDTH * 89/106;
 let UNICORN_IMG;
 let SPARKLES_GIF;
+let BACKGROUND_IMG;
 let SPARKLES_FRAME_COUNT;
 
 function fairytalePreload() {
     UNICORN_IMG = loadImage('resources/unicorn.png');
     SPARKLES_GIF = loadImage('resources/sparkles.gif', updateFrameCount);
+    BACKGROUND_IMG = loadImage('resources/castle-background.jpg');
 }
 
 function updateFrameCount() {
@@ -23,12 +25,11 @@ class FairytaleTapper {
     
 
     constructor() {
-        background(255);
         this.generateUnicornAtRandomInterval();
     }
 
     draw () {
-        background(255);
+        background(BACKGROUND_IMG);
         this.unicorns.forEach(unicorn => {
             unicorn.draw();
             
@@ -39,8 +40,14 @@ class FairytaleTapper {
         });
         
         
+        noStroke();
+        fill(255, 200);
+        rect(0, 0, 300, 100);
+
         textSize(64);
+        fill(0);
         text(`Score: ${this.score}`, 20, 70);
+
     }
 
     makeUnicorn() {

@@ -20,6 +20,7 @@ class Unicorn {
         this.isClicked = false;
         this.sparkles = new Sparkles(this.x, this.y);
         this.rotation = 0;
+        this.doSpin = false;
     }
 
     click(game) {
@@ -38,9 +39,30 @@ class Unicorn {
         }
     }
 
+    //Rotation works. I don't know how or why. I couldn't explain it if I tried. IT WORKS DO NOT TOUCH.
     updateImageAngle() {
-        this.clickable.imageAngle = sin(PI / 180 * this.rotation) * IMAGE_ROTATION_RANGE;
+        if (this.doSpin) {
+            if (this.rotation < 180) {
+                this.clickable.imageAngle = easeIn(this.rotation / 180) * this.rotation;
+            } else {
+                this.clickable.imageAngle = easeIn(1 - (this.rotation - 180)/ 180) * (this.rotation - 360) + 360;
+            }
+            
+        } else {
+            //This is repsonsible for easing. Everything else does the rotation animation.
+            this.clickable.imageAngle = sin(PI / 180 * this.rotation) * IMAGE_ROTATION_RANGE;
+        }
+
+        //This is basically just the rotation speed
         this.rotation += 2;
+        
+        if (this.rotation >= 360) {
+            this.rotation = 0;
+            this.doSpin = false;
+            if (Math.random() < 0.2) {
+                this.doSpin = true;
+            }
+        }
     }
 
 }
@@ -77,4 +99,13 @@ function getRandomX() {
 
 function getRandomY() {
     return Math.floor(Math.random() * (height - UNICORN_HEIGHT))
+}
+
+function easeIn(angle) {
+    return 1 - sin(PI / 2 * (1 - angle));
+}
+
+//Random function from the internet
+function easeOut(angle) {
+    return sin(PI * angle / 2);
 }

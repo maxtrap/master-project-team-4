@@ -1,11 +1,13 @@
+const IMAGE_ROTATION_RANGE = 5;
+
 
 class Unicorn {
 
     constructor(game) {
-        const x = getRandomX();
-        const y = getRandomY();
+        this.x = getRandomX();
+        this.y = getRandomY();
         this.clickable = new Clickable();
-        this.clickable.locate(x, y);
+        this.clickable.locate(this.x, this.y);
         this.clickable.image = UNICORN_IMG;
         this.clickable.resize(UNICORN_WIDTH, UNICORN_HEIGHT);
         this.clickable.cornerRadius = 0;
@@ -16,7 +18,8 @@ class Unicorn {
         this.clickable.onPress = this.click.bind(this, game);
 
         this.isClicked = false;
-        this.sparkles = new Sparkles(x, y);
+        this.sparkles = new Sparkles(this.x, this.y);
+        this.rotation = 0;
     }
 
     click(game) {
@@ -27,11 +30,17 @@ class Unicorn {
     draw(game) {
         if (this.isClicked) {
             if (this.sparkles.draw()) {
-                game.unicorns = game.unicorns.filter(unicorn => unicorn !== this);
+                game.unicorns = game.unicorns.filter(unicorn => unicorn != this);
             }
         } else {
             this.clickable.draw();
+            this.updateImageAngle();
         }
+    }
+
+    updateImageAngle() {
+        this.clickable.imageAngle = sin(PI / 180 * this.rotation) * IMAGE_ROTATION_RANGE;
+        this.rotation += 2;
     }
 
 }

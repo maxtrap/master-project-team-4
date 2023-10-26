@@ -78,6 +78,8 @@ function Clickable(x,y) {
 	this.noTint = true; // default to disable tinting
 	this.filter = null; // filter effect
 
+	this.imageAngle = 0; // Applies rotation to the image by the imageAngle. Does not affect button hitbox. 
+
 	this.updateTextSize = function () {
 		if (this.textScaled) {
 			for (let i = this.height; i > 0; i--) {
@@ -125,9 +127,13 @@ function Clickable(x,y) {
 
 	this.drawImage = function(){
 		push();
+
 		imageMode(CENTER);
-		let centerX = this.x + this.width / 2;
-		let centerY = this.y + this.height / 2;
+		translate(this.x + this.width / 2, this.y + this.height / 2);
+		rotate(PI / 180 * this.imageAngle);
+		
+		let centerX = 0;
+		let centerY = 0;
 		let imgWidth = this.width;
 		let imgHeight = this.height;
 		if(this.fitImage){

@@ -49,7 +49,7 @@ class Unicorn {
             }
             
         } else {
-            //This is repsonsible for easing. Everything else does the rotation animation.
+            //This is repsonsible for the small rotation effect. Everything else does the rotation animation.
             this.clickable.imageAngle = sin(PI / 180 * this.rotation) * IMAGE_ROTATION_RANGE;
         }
 

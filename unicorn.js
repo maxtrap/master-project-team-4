@@ -3,7 +3,7 @@ const IMAGE_ROTATION_RANGE = 5;
 
 class Unicorn {
 
-    constructor(game) {
+    constructor(onClick) {
         this.x = getRandomX();
         this.y = getRandomY();
         this.clickable = new Clickable();
@@ -15,7 +15,7 @@ class Unicorn {
         this.clickable.text = "";
         this.clickable.color = "nofill"
         
-        this.clickable.onPress = this.click.bind(this, game);
+        this.clickable.onPress = this.click.bind(this, onClick);
 
         this.isClicked = false;
         this.sparkles = new Sparkles(this.x, this.y);
@@ -23,15 +23,15 @@ class Unicorn {
         this.doSpin = false;
     }
 
-    click(game) {
+    click(onClick) {
         this.isClicked = true;
-        game.score++;
+        onClick();
     }
 
-    draw(game) {
+    draw(onDissapear) {
         if (this.isClicked) {
             if (this.sparkles.draw()) {
-                game.unicorns = game.unicorns.filter(unicorn => unicorn != this);
+                onDissapear();
             }
         } else {
             this.clickable.draw();

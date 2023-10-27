@@ -1,11 +1,13 @@
+const UNICORN_WIDTH = 200;
+const UNICORN_HEIGHT = UNICORN_WIDTH * 89/106;
 const IMAGE_ROTATION_RANGE = 5;
 
 
 class Unicorn {
 
-    constructor(onClick) {
-        this.x = getRandomX();
-        this.y = getRandomY();
+    constructor(onClick = null, x = getRandomX(), y = getRandomY()) {
+        this.x = x;
+        this.y = y;
         this.clickable = new Clickable();
         this.clickable.locate(this.x, this.y);
         this.clickable.image = UNICORN_IMG;
@@ -25,12 +27,14 @@ class Unicorn {
 
     click(onClick) {
         this.isClicked = true;
-        onClick();
+        if (onClick !== null) {
+            onClick();
+        }
     }
 
     draw(onDissapear) {
         if (this.isClicked) {
-            if (this.sparkles.draw()) {
+            if (this.sparkles.draw() && onDissapear !== null) {
                 onDissapear();
             }
         } else {
@@ -59,7 +63,7 @@ class Unicorn {
         if (this.rotation >= 360) {
             this.rotation = 0;
             this.doSpin = false;
-            if (Math.random() < 0.2) {
+            if (Math.random() < 0.4) {
                 this.doSpin = true;
             }
         }

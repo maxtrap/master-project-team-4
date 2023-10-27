@@ -2,6 +2,7 @@ class FairytaleLoseScreen {
 
     constructor(score) {
         this.finalScore = score;
+        this.unicorn = new Unicorn(null, width / 2 + 200, height / 2 - UNICORN_HEIGHT / 2);
     }
 
     get cardWidth() {
@@ -43,9 +44,14 @@ class FairytaleLoseScreen {
         textSize(64);
         fill(0);
         textAlign(CENTER);
-        text(`Your score:  ${this.finalScore}/${SCORE_GOAL}`, width / 2, height / 2 - this.cardHeight * 0.1);
+        text(`Your score:  ${this.finalScore}/${SCORE_GOAL}`, width / 2 - 100, height / 2 - this.cardHeight * 0.1);
         textSize(48);
-        text('You\'re almost there!', width / 2, height / 2 + this.cardHeight * 0.05);
+        text('You\'re almost there!', width / 2 - 100, height / 2 + this.cardHeight * 0.05);
+
+        if (this.unicorn !== null) {
+            tint(255);
+            this.unicorn.draw(() => this.unicorn = null);
+        }
     }
 
 }

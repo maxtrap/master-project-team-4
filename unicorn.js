@@ -101,11 +101,7 @@ function getRandomY() {
     return Math.floor(Math.random() * (height - UNICORN_HEIGHT))
 }
 
+//Random function from the internet
 function easeIn(angle) {
     return 1 - sin(PI / 2 * (1 - angle));
-}
-
-//Random function from the internet
-function easeOut(angle) {
-    return sin(PI * angle / 2);
 }

@@ -34,6 +34,16 @@ p5.prototype.runGUI = function () {
 
 p5.prototype.registerMethod('post', p5.prototype.runGUI);
 
+
+
+function clearClickables() {
+	cl_clickables = [];
+}
+
+function removeClickable(clickable) {
+	cl_clickables = cl_clickables.filter(clb => clb != clickable);
+}
+
 //This function is used to get the bounding size of a
 //string of text for use in the 'textScaled' property
 function getTextBounds(m, font, size) {
@@ -69,6 +79,8 @@ function Clickable(x,y) {
 	this.textSize = 12;		//Size for the text shown
 	this.textFont = "sans-serif";	//Font for the text shown
 	this.textScaled = false;     //Scale the text with the size of the clickable
+
+	this.diagonalCorners = false; //If true, diagonal corners will be rounded
 	
 	// image options
 	this.image = null; // image object from p5loadimage()
@@ -85,8 +97,8 @@ function Clickable(x,y) {
 			for (let i = this.height; i > 0; i--) {
 				if (getTextBounds(this.text, this.textFont, i)[0] <= this.width
 					&& getTextBounds(this.text, this.textFont, i)[1] <= this.height) {
-					console.log("textbounds: " + getTextBounds(this.text, this.font, i));
-					console.log("boxsize: " + this.width + ", " + this.height);
+					// console.log("textbounds: " + getTextBounds(this.text, this.font, i));
+					// console.log("boxsize: " + this.width + ", " + this.height);
 					this.textSize = i / 2;
 					break;
 				}
@@ -170,7 +182,11 @@ function Clickable(x,y) {
 		}
 		stroke(this.stroke);
 		strokeWeight(this.strokeWeight);
-		rect(this.x, this.y, this.width, this.height, this.cornerRadius);
+		if (this.diagonalCorners) {
+			rect(this.x, this.y, this.width, this.height, this.cornerRadius, 0, this.cornerRadius, 0);
+		} else {
+			rect(this.x, this.y, this.width, this.height, this.cornerRadius);
+		}
 		fill(this.textColor);
 		noStroke();
 		if(this.image){

@@ -26,6 +26,7 @@ class Unicorn {
     }
 
     click(onClick) {
+        removeClickable(this.clickable);
         this.isClicked = true;
         if (onClick !== null) {
             onClick();

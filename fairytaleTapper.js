@@ -1,6 +1,6 @@
 const RANDOM_INTERVAL_LOW = 0.1;
-const RANDOM_INTERVAL_HIGH = 1;
-const GAME_LENGTH = 100;
+const RANDOM_INTERVAL_HIGH = 0.5;
+const GAME_LENGTH = 10;
 const SCORE_GOAL = 200;
 
 let UNICORN_IMG;
@@ -23,9 +23,11 @@ class FairytaleTapper {
     unicorns = [];
     score = 0;
     time = GAME_LENGTH;
+    isGameFinished = false;
     
 
     constructor() {
+        clearClickables();
         this.generateUnicornAtRandomInterval();
         this.startTime = millis();
     }
@@ -84,15 +86,21 @@ class FairytaleTapper {
 
 
     generateUnicornAtRandomInterval() {
-        this.unicorns.push(new Unicorn(() => this.score++));
+        if (this.unicorns.length <= 20) {
+            this.unicorns.push(new Unicorn(() => this.score++));
+        }
         // Generate a random time interval between 3 and 5 seconds (in milliseconds)
         const randomInterval = Math.random() * (RANDOM_INTERVAL_HIGH - RANDOM_INTERVAL_LOW) * 1000 + RANDOM_INTERVAL_LOW * 1000;
       
-        // Schedule the function to run again after the random interval
-        setTimeout(this.generateUnicornAtRandomInterval.bind(this), randomInterval);
+        if (!this.isGameFinished) {
+            // Schedule the function to run again after the random interval
+            setTimeout(this.generateUnicornAtRandomInterval.bind(this), randomInterval);
+        }
     }
 
     loseGame() {
+        this.isGameFinished = true;
+        clearClickables();
         setScene(new FairytaleLoseScreen(this.score));
     }
 }

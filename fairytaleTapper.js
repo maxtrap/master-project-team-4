@@ -1,7 +1,7 @@
 const RANDOM_INTERVAL_LOW = 0.1;
 const RANDOM_INTERVAL_HIGH = 0.5;
 const GAME_LENGTH = 10;
-const SCORE_GOAL = 200;
+const SCORE_GOAL = 3;
 
 let UNICORN_IMG;
 let SPARKLES_GIF;
@@ -30,6 +30,10 @@ class FairytaleTapper {
         clearClickables();
         this.generateUnicornAtRandomInterval();
         this.startTime = millis();
+
+        if (localStorage.getItem("ft_highscore") === null) {
+            localStorage.setItem("ft_highscore", "-1");
+        }
     }
 
     draw () {
@@ -44,7 +48,7 @@ class FairytaleTapper {
     
 
     drawScore() {
-        let scoreString = `Score: ${this.score}/200`
+        let scoreString = `Score: ${this.score}/${SCORE_GOAL}`
 
         noStroke();
         rectMode(CORNER);
@@ -71,23 +75,24 @@ class FairytaleTapper {
         fill(0);
         textAlign(CENTER);
 
-        let minutes = Math.floor(this.time / 60);
-        let seconds = this.time % 60;
-        let formattedSeconds = seconds.toLocaleString('en-US', {
-            minimumIntegerDigits: 2,
-            useGrouping: false,
-          });
-        text(`${minutes}:${formattedSeconds}`, width / 2, 70);
+        
+        text(timeFormatted(this.time), width / 2, 70);
 
         if (this.time <= 0) {
             this.loseGame();
         }
     }
 
+    onClick() {
+        this.score++;
+        if (this.score >= SCORE_GOAL) {
+            this.winGame();
+        }
+    }
 
     generateUnicornAtRandomInterval() {
         if (this.unicorns.length <= 20) {
-            this.unicorns.push(new Unicorn(() => this.score++));
+            this.unicorns.push(new Unicorn(this.onClick.bind(this)));
         }
         // Generate a random time interval between 3 and 5 seconds (in milliseconds)
         const randomInterval = Math.random() * (RANDOM_INTERVAL_HIGH - RANDOM_INTERVAL_LOW) * 1000 + RANDOM_INTERVAL_LOW * 1000;
@@ -103,5 +108,21 @@ class FairytaleTapper {
         clearClickables();
         setScene(new FairytaleLoseScreen(this.score));
     }
+
+    winGame() {
+        this.isGameFinished = true;
+        clearClickables();
+        setScene(new FairytaleWinScreen(this.time));
+    }
+}
+
+function timeFormatted(timeInSeconds) {
+    let minutes = Math.floor(timeInSeconds / 60);
+    let seconds = timeInSeconds % 60;
+    let formattedSeconds = seconds.toLocaleString('en-US', {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      });
+    return `${minutes}:${formattedSeconds}`;
 }
 

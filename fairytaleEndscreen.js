@@ -1,7 +1,7 @@
 class FairytaleEndScreen {
 
     constructor(score) {
-        this.unicorn = new Unicorn(null, width / 2 + 200, height / 2 - UNICORN_HEIGHT / 2);
+        this.unicorn = new Unicorn(null, width / 2 + this.cardWidth * 0.25, height / 2 - UNICORN_HEIGHT / 2);
     }
 
     get cardWidth() {
@@ -136,6 +136,16 @@ class FairytaleWinScreen extends FairytaleEndScreen {
         this.replayButton.onPress = () => setScene(new FairytaleTapper());
         
         this.replayButton.text = 'Play Again';
+
+
+        this.nextButton = new EndScreenButton();
+        this.nextButton.defaultWidth = this.cardWidth / 3;
+        this.nextButton.defaultHeight = 100;
+        this.nextButton.buttonX = width / 2 - 50;
+        this.nextButton.buttonY = height / 2 + this.cardHeight * 0.25;
+        this.nextButton.onPress = () => setScene(new FairytaleTapper());
+        
+        this.nextButton.text = 'Next Level';
     }
 
     drawBody() {
@@ -145,5 +155,6 @@ class FairytaleWinScreen extends FairytaleEndScreen {
     drawButtons() {
         rectMode(CORNER);
         this.replayButton.draw();
+        this.nextButton.draw();
     }
 }

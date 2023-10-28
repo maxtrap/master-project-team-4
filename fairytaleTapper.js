@@ -1,6 +1,6 @@
 const RANDOM_INTERVAL_LOW = 0.1;
 const RANDOM_INTERVAL_HIGH = 0.5;
-const GAME_LENGTH = 10;
+const GAME_LENGTH = 50;
 const SCORE_GOAL = 3;
 
 let UNICORN_IMG;
@@ -49,13 +49,14 @@ class FairytaleTapper {
 
     drawScore() {
         let scoreString = `Score: ${this.score}/${SCORE_GOAL}`
+        textSize(64);
 
         noStroke();
         rectMode(CORNER);
         fill(255, 200);
         rect(0, 0, textWidth(scoreString) + 45, 100, 0, 0, 20, 0);
 
-        textSize(64);
+        
         fill(0);
         textAlign(LEFT);
         text(scoreString, 20, 70);
@@ -69,14 +70,14 @@ class FairytaleTapper {
         noStroke();
         fill(255, 200);
         rectMode(CENTER);
-        rect(width / 2, 50, 175, 100, 0, 0, 20, 20);
+        rect(width / 2, 50, 262, 150, 0, 0, 20, 20);
 
-        textSize(64);
+        textSize(100);
         fill(0);
         textAlign(CENTER);
 
         
-        text(timeFormatted(this.time), width / 2, 70);
+        text(timeFormatted(this.time), width / 2, 92);
 
         if (this.time <= 0) {
             this.loseGame();

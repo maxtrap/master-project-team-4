@@ -6,6 +6,7 @@ const buttonVerticalPadding = 10;
 
 function setScene(scene) {
   currentScene = scene;
+  playMusic();
 }
 
 function buttonFactory(x, y, text, cb) {

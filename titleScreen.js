@@ -1,4 +1,4 @@
-var foo = [
+var foo = [ //foo? Come on.  ~ Max
   {
     text: "Fairytale Tapper",
     cb: () => {
@@ -21,7 +21,6 @@ var foo = [
 
 class TitleScreen {
   constructor() {
-    frameRate(3);
     this.buttons = [];
     for (const [i, val] of foo.entries()) {
       this.buttons.push(

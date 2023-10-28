@@ -99,7 +99,7 @@ class FairytaleLoseScreen extends FairytaleEndScreen {
         this.replayButton = new EndScreenButton();
         this.replayButton.defaultWidth = this.cardWidth / 2;
         this.replayButton.defaultHeight = 100;
-        this.replayButton.buttonX = width / 2 - 350;
+        this.replayButton.buttonX = width / 2 - this.replayButton.defaultWidth / 2;
         this.replayButton.buttonY = height / 2 + this.cardHeight * 0.25;
         this.replayButton.onPress = () => setScene(new FairytaleTapper());
         
@@ -107,7 +107,7 @@ class FairytaleLoseScreen extends FairytaleEndScreen {
     }
 
     drawBody() {
-        super.drawBody(`Your score:  ${this.finalScore}/${SCORE_GOAL}`, 'You\'re almost there!');
+        super.drawBody(`   Your score:  ${this.finalScore}/${SCORE_GOAL}`, '   You\'re almost there!');
     }
 
     drawButtons() {
@@ -127,11 +127,13 @@ class FairytaleWinScreen extends FairytaleEndScreen {
             this.highscore = timeFormatted(timeLeft);
             localStorage.setItem("ft_highscore", timeLeft.toString());
         }
+
+        let buttonSpacing = 30;
         
         this.replayButton = new EndScreenButton();
-        this.replayButton.defaultWidth = this.cardWidth / 3;
+        this.replayButton.defaultWidth = this.cardWidth * 0.4;
         this.replayButton.defaultHeight = 100;
-        this.replayButton.buttonX = width / 2 - 450;
+        this.replayButton.buttonX = width / 2 - this.replayButton.defaultWidth - buttonSpacing;
         this.replayButton.buttonY = height / 2 + this.cardHeight * 0.25;
         this.replayButton.onPress = () => setScene(new FairytaleTapper());
         
@@ -139,9 +141,9 @@ class FairytaleWinScreen extends FairytaleEndScreen {
 
 
         this.nextButton = new EndScreenButton();
-        this.nextButton.defaultWidth = this.cardWidth / 3;
+        this.nextButton.defaultWidth = this.cardWidth * 0.4;
         this.nextButton.defaultHeight = 100;
-        this.nextButton.buttonX = width / 2 - 50;
+        this.nextButton.buttonX = width / 2 + buttonSpacing;
         this.nextButton.buttonY = height / 2 + this.cardHeight * 0.25;
         this.nextButton.onPress = () => setScene(new FairytaleTapper());
         

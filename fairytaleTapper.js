@@ -1,6 +1,6 @@
 const RANDOM_INTERVAL_LOW = 0.1;
 const RANDOM_INTERVAL_HIGH = 0.5;
-const GAME_LENGTH = 50;
+const GAME_LENGTH = 10;
 const SCORE_GOAL = 3;
 
 let UNICORN_IMG;

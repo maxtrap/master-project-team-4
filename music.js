@@ -28,7 +28,7 @@ function playMusic() {
         }  
 
         currentMusic = music;
-        // music.setVolume(0.5);
+        music.setVolume(0.5);
         music.loop();
     }
     

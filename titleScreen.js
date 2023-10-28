@@ -2,7 +2,7 @@ var foo = [ //foo? Come on.  ~ Max
   {
     text: "Fairytale Tapper",
     cb: () => {
-      setScene(new FairytaleTapper());
+      setScene(() => new FairytaleTapper());
     },
   },
   {

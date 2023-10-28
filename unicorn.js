@@ -28,6 +28,8 @@ class Unicorn {
     click(onClick) {
         removeClickable(this.clickable);
         this.isClicked = true;
+        HAPPY_UNICORN.play();
+
         if (onClick !== null) {
             onClick();
         }
@@ -64,7 +66,7 @@ class Unicorn {
         if (this.rotation >= 360) {
             this.rotation = 0;
             this.doSpin = false;
-            if (Math.random() < 0.4) {
+            if (Math.random() < 0.5) {
                 this.doSpin = true;
             }
         }

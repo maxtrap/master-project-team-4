@@ -4,8 +4,10 @@ const buttonWidth = 300;
 const buttonHeight = 50;
 const buttonVerticalPadding = 10;
 
-function setScene(scene) {
-  currentScene = scene;
+function setScene(sceneFactory) {
+  clearClickables();
+  clearMissables();
+  currentScene = sceneFactory();
   playMusic();
 }
 

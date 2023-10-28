@@ -1,7 +1,10 @@
-const RANDOM_INTERVAL_LOW = 0.1;
-const RANDOM_INTERVAL_HIGH = 0.5;
-const GAME_LENGTH = 10;
-const SCORE_GOAL = 3;
+const RANDOM_INTERVAL_LOW = 1;
+const RANDOM_INTERVAL_HIGH = 2;
+const GAME_LENGTH = 60;
+const SCORE_GOAL = 30;
+
+let HAPPY_UNICORN;
+let ANGRY_UNICORN;
 
 let UNICORN_IMG;
 let SPARKLES_GIF;
@@ -9,6 +12,9 @@ let BACKGROUND_IMG;
 let SPARKLES_FRAME_COUNT;
 
 function fairytalePreload() {
+    HAPPY_UNICORN = loadSound('resources/sparkle.mp3');
+    ANGRY_UNICORN = loadSound('resources/horse-neigh.mp3');
+
     UNICORN_IMG = loadImage('resources/unicorn.png');
     SPARKLES_GIF = loadImage('resources/sparkles.gif', initializeFrameCount);
     BACKGROUND_IMG = loadImage('resources/castle-background.jpg');
@@ -27,13 +33,14 @@ class FairytaleTapper {
     
 
     constructor() {
-        clearClickables();
         this.generateUnicornAtRandomInterval();
         this.startTime = millis();
 
         if (localStorage.getItem("ft_highscore") === null) {
             localStorage.setItem("ft_highscore", "-1");
         }
+
+        cl_missables.push(this.onMiss.bind(this));
     }
 
     draw () {
@@ -86,13 +93,18 @@ class FairytaleTapper {
 
     onClick() {
         this.score++;
+
         if (this.score >= SCORE_GOAL) {
             this.winGame();
         }
     }
 
+    onMiss() {
+        ANGRY_UNICORN.play();
+    }
+
     generateUnicornAtRandomInterval() {
-        if (this.unicorns.length <= 20) {
+        if (this.unicorns.length <= 10) {
             this.unicorns.push(new Unicorn(this.onClick.bind(this)));
         }
         // Generate a random time interval between 3 and 5 seconds (in milliseconds)
@@ -106,14 +118,12 @@ class FairytaleTapper {
 
     loseGame() {
         this.isGameFinished = true;
-        clearClickables();
-        setScene(new FairytaleLoseScreen(this.score));
+        setScene(() => new FairytaleLoseScreen(this.score));
     }
 
     winGame() {
         this.isGameFinished = true;
-        clearClickables();
-        setScene(new FairytaleWinScreen(this.time));
+        setScene(() => new FairytaleWinScreen(this.time));
     }
 }
 

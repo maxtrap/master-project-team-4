@@ -7,6 +7,9 @@ var cl_lastClicked = null;
 //All created buttons
 var cl_clickables = [];
 
+//All functions that will be called if clicks in the wrong spot
+let cl_missables = [];
+
 //This function is what makes the magic happen and should be ran after
 //each draw cycle.
 p5.prototype.runGUI = function () {
@@ -19,8 +22,12 @@ p5.prototype.runGUI = function () {
 			cl_lastHovered.onHover();
 		}
 	}
-	if (!cl_mouseWasPressed && cl_lastClicked != null) {
-		cl_lastClicked.onPress();
+	if (!cl_mouseWasPressed) {
+		if (cl_lastClicked != null) {
+			cl_lastClicked.onPress();
+		} else if (mouseIsPressed) {
+			cl_missables.forEach(miss => miss());
+		}
 	}
 	if (cl_mouseWasPressed && !mouseIsPressed && cl_lastClicked != null) {
 		if (cl_lastClicked == cl_lastHovered) {
@@ -38,6 +45,10 @@ p5.prototype.registerMethod('post', p5.prototype.runGUI);
 
 function clearClickables() {
 	cl_clickables = [];
+}
+
+function clearMissables() {
+	cl_missables = [];
 }
 
 function removeClickable(clickable) {

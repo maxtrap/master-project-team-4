@@ -101,7 +101,7 @@ class FairytaleLoseScreen extends FairytaleEndScreen {
         this.replayButton.defaultHeight = 100;
         this.replayButton.buttonX = width / 2 - this.replayButton.defaultWidth / 2;
         this.replayButton.buttonY = height / 2 + this.cardHeight * 0.25;
-        this.replayButton.onPress = () => setScene(new FairytaleTapper());
+        this.replayButton.onPress = () => setScene(() => new FairytaleTapper());
         
         this.replayButton.text = 'Play Again';
     }
@@ -135,7 +135,7 @@ class FairytaleWinScreen extends FairytaleEndScreen {
         this.replayButton.defaultHeight = 100;
         this.replayButton.buttonX = width / 2 - this.replayButton.defaultWidth - buttonSpacing;
         this.replayButton.buttonY = height / 2 + this.cardHeight * 0.25;
-        this.replayButton.onPress = () => setScene(new FairytaleTapper());
+        this.replayButton.onPress = () => setScene(() => new FairytaleTapper());
         
         this.replayButton.text = 'Play Again';
 
@@ -145,7 +145,7 @@ class FairytaleWinScreen extends FairytaleEndScreen {
         this.nextButton.defaultHeight = 100;
         this.nextButton.buttonX = width / 2 + buttonSpacing;
         this.nextButton.buttonY = height / 2 + this.cardHeight * 0.25;
-        this.nextButton.onPress = () => setScene(new FairytaleTapper());
+        this.nextButton.onPress = () => setScene(() => new FairytaleTapper());
         
         this.nextButton.text = 'Next Level';
     }

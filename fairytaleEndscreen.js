@@ -1,6 +1,7 @@
 class FairytaleEndScreen {
 
-    constructor(score) {
+    constructor(level) {
+        this.level = level;
         this.unicorn = new Unicorn(null, width / 2 + this.cardWidth * 0.25, height / 2 - UNICORN_HEIGHT / 2);
     }
 
@@ -13,7 +14,7 @@ class FairytaleEndScreen {
 
     draw() {
         tint(128);
-        background(BACKGROUND_IMG);
+        background(getBackground(this.level));
         tint(255);
         this.drawBody();
         this.drawTitle(); 
@@ -91,8 +92,8 @@ class EndScreenButton extends Clickable {
 }
 
 class FairytaleLoseScreen extends FairytaleEndScreen {
-    constructor(score) {
-        super();
+    constructor(level, score) {
+        super(level);
         this.finalScore = score;
         
         
@@ -101,7 +102,7 @@ class FairytaleLoseScreen extends FairytaleEndScreen {
         this.replayButton.defaultHeight = 100;
         this.replayButton.buttonX = width / 2 - this.replayButton.defaultWidth / 2;
         this.replayButton.buttonY = height / 2 + this.cardHeight * 0.25;
-        this.replayButton.onPress = () => setScene(() => new FairytaleTapper());
+        this.replayButton.onPress = () => setScene(() => new FairytaleTapper(level));
         
         this.replayButton.text = 'Play Again';
     }
@@ -117,8 +118,8 @@ class FairytaleLoseScreen extends FairytaleEndScreen {
 }
 
 class FairytaleWinScreen extends FairytaleEndScreen {
-    constructor(timeLeft) {
-        super();
+    constructor(level, timeLeft) {
+        super(level);
         this.timeLeft = timeFormatted(timeLeft);
 
         let highscore = parseInt(localStorage.getItem("ft_highscore"), 10);
@@ -135,7 +136,7 @@ class FairytaleWinScreen extends FairytaleEndScreen {
         this.replayButton.defaultHeight = 100;
         this.replayButton.buttonX = width / 2 - this.replayButton.defaultWidth - buttonSpacing;
         this.replayButton.buttonY = height / 2 + this.cardHeight * 0.25;
-        this.replayButton.onPress = () => setScene(() => new FairytaleTapper());
+        this.replayButton.onPress = () => setScene(() => new FairytaleTapper(level));
         
         this.replayButton.text = 'Play Again';
 
@@ -145,7 +146,7 @@ class FairytaleWinScreen extends FairytaleEndScreen {
         this.nextButton.defaultHeight = 100;
         this.nextButton.buttonX = width / 2 + buttonSpacing;
         this.nextButton.buttonY = height / 2 + this.cardHeight * 0.25;
-        this.nextButton.onPress = () => setScene(() => new FairytaleTapper(2));
+        this.nextButton.onPress = () => setScene(() => new FairytaleTapper(level + 1));
         
         this.nextButton.text = 'Next Level';
     }

@@ -1,5 +1,5 @@
-const GAME_LENGTH = 60;
-const SCORE_GOAL = 30;
+const GAME_LENGTH = 30;
+const SCORE_GOAL = 15;
 
 const RANDOM_INTERVAL_LOW = 1;
 const RANDOM_INTERVAL_HIGH = 2;
@@ -10,7 +10,8 @@ let ANGRY_UNICORN;
 let CORN_IMG;
 let BUTTERFLY_GIF;
 let SPARKLES_GIF;
-let BACKGROUND_IMG;
+let LEVEL_1_BACKGROUND;
+let LEVEL_2_BACKGROUND;
 let SPARKLES_FRAME_COUNT;
 let BUTTERFLY_FRAME_COUNT;
 
@@ -21,7 +22,8 @@ function fairytalePreload() {
     UNICORN_IMG = loadImage('resources/unicorn.png');
     BUTTERFLY_GIF = loadImage('resources/butterfly.gif', initializeButterflyFrameCount);
     SPARKLES_GIF = loadImage('resources/sparkles.gif', initializeSparklesFrameCount);
-    BACKGROUND_IMG = loadImage('resources/castle-background.jpg');
+    LEVEL_1_BACKGROUND = loadImage('resources/castle-background.jpg');
+    LEVEL_2_BACKGROUND = loadImage('resources/magical-forest.jpg');
 }
 
 function initializeSparklesFrameCount() {
@@ -53,7 +55,7 @@ class FairytaleTapper {
     }
 
     draw () {
-        background(BACKGROUND_IMG);
+        background(getBackground(this.level));
         this.drawScore();
         this.drawTimer();
         this.drawLevelIndicator();
@@ -157,12 +159,12 @@ class FairytaleTapper {
 
     loseGame() {
         this.isGameFinished = true;
-        setScene(() => new FairytaleLoseScreen(this.score));
+        setScene(() => new FairytaleLoseScreen(this.level, this.score));
     }
 
     winGame() {
         this.isGameFinished = true;
-        setScene(() => new FairytaleWinScreen(this.time));
+        setScene(() => new FairytaleWinScreen(this.level, this.time));
     }
 }
 
@@ -176,3 +178,11 @@ function timeFormatted(timeInSeconds) {
     return `${minutes}:${formattedSeconds}`;
 }
 
+function getBackground(level) {
+    switch (level) {
+        case 1:
+            return LEVEL_1_BACKGROUND;
+        case 2:
+            return LEVEL_2_BACKGROUND;
+    }
+}

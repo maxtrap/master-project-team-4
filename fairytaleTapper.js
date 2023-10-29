@@ -1,8 +1,10 @@
 const GAME_LENGTH = 30;
-const SCORE_GOAL = 15;
+const SCORE_GOAL = 10;
 
 const RANDOM_INTERVAL_LOW = 1;
 const RANDOM_INTERVAL_HIGH = 2;
+
+const NUM_LEVELS = 3;
 
 //Soun effects
 let SPARKLE_SOUND;

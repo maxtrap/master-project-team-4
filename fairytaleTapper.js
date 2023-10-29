@@ -1,5 +1,5 @@
-const GAME_LENGTH = 30;
-const SCORE_GOAL = 10;
+const GAME_LENGTH = 60;
+const SCORE_GOAL = 20;
 
 const RANDOM_INTERVAL_LOW = 1;
 const RANDOM_INTERVAL_HIGH = 2;
@@ -72,8 +72,8 @@ class FairytaleTapper {
         this.startTime = millis();
         this.level = level;
 
-        if (localStorage.getItem("ft_highscore") === null) {
-            localStorage.setItem("ft_highscore", "-1");
+        if (localStorage.getItem("ft_highscore" + level) === null) {
+            localStorage.setItem("ft_highscore" + level, "-1");
         }
 
         cl_missables.push(this.onMiss.bind(this));

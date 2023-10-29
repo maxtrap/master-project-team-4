@@ -122,11 +122,11 @@ class FairytaleWinScreen extends FairytaleEndScreen {
         super(level);
         this.timeLeft = timeFormatted(timeLeft);
 
-        let highscore = parseInt(localStorage.getItem("ft_highscore"), 10);
+        let highscore = parseInt(localStorage.getItem("ft_highscore" + level), 10);
         this.highscore = timeFormatted(highscore);
         if (timeLeft > highscore) {
             this.highscore = timeFormatted(timeLeft);
-            localStorage.setItem("ft_highscore", timeLeft.toString());
+            localStorage.setItem("ft_highscore" + level, timeLeft.toString());
         }
 
         let buttonSpacing = 30;

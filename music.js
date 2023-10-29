@@ -29,6 +29,10 @@ function playMusic() {
     let music = getMusic();
 
     if (music === null) {
+        if (currentMusic) {
+            currentMusic.stop();
+            currentMusic = null;
+        }
         return;
     }
 

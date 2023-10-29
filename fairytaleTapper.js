@@ -4,17 +4,41 @@ const SCORE_GOAL = 15;
 const RANDOM_INTERVAL_LOW = 1;
 const RANDOM_INTERVAL_HIGH = 2;
 
+//Soun effects
+let SPARKLE_SOUND;
+let ANGRY_UNICORN;
+let EXPLOSION_SOUND;
 
+//Creatures
+let UNICORN_IMG;
+let BUTTERFLY_GIF;
+let DRAGON_RIGHT_GIF;
+let DRAGON_LEFT_GIF;
+
+//Death effects
+let SPARKLES_GIF;
+let EXPLOSION_GIF;
+
+//Backdrops
+let LEVEL1_BACKGROUND;
+let LEVEL2_BACKGROUND;
+let LEVEL3_BACKGROUND;
+
+let SPARKLES_FRAME_COUNT;
+let EXPLOSION_FRAME_COUNT;
 
 function fairytalePreload() {
     SPARKLE_SOUND = loadSound('resources/sparkle.mp3');
+    EXPLOSION_SOUND = loadSound('resources/explosion.mp3');
     ANGRY_UNICORN = loadSound('resources/horse-neigh.mp3');
 
     UNICORN_IMG = loadImage('resources/unicorn.png');
     BUTTERFLY_GIF = loadImage('resources/butterfly.gif');
     DRAGON_RIGHT_GIF = loadImage('resources/dragon-right.gif');
     DRAGON_LEFT_GIF = loadImage('resources/dragon-left.gif');
+    
     SPARKLES_GIF = loadImage('resources/sparkles.gif', initializeSparklesFrameCount);
+    EXPLOSION_GIF = loadImage('resources/explosion.gif', initializeExplosionFrameCount);
     
     LEVEL1_BACKGROUND = loadImage('resources/magical-castle.jpg');
     LEVEL2_BACKGROUND = loadImage('resources/magical-forest.jpg');
@@ -23,6 +47,10 @@ function fairytalePreload() {
 
 function initializeSparklesFrameCount() {
     SPARKLES_FRAME_COUNT = SPARKLES_GIF.numFrames();
+}
+
+function initializeExplosionFrameCount() {
+    EXPLOSION_FRAME_COUNT = EXPLOSION_GIF.numFrames();
 }
 
 class FairytaleTapper {

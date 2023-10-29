@@ -37,6 +37,10 @@ class Butterfly extends Creature {
         this.movementDirection = directions[Math.floor(Math.random() * directions.length)];
     }
 
+    click(onClick) {
+        super.click(onClick, new SparklesEffect(this.clickable.x + this.clickable.width / 2, this.clickable.y + this.clickable.height / 2));
+    }
+
     draw() {
         this.moveButterfly();
         return super.draw();

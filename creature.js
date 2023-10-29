@@ -13,22 +13,20 @@ class Creature {
         this.isClicked = false;
     }
 
-    click(onClick) {
+    click(onClick, deathEffect) {
         removeClickable(this.clickable);
 
-        this.sparkles = new Sparkles(this.clickable.x + this.clickable.width / 2, this.clickable.y + this.clickable.height / 2);
+        this.deathEffect = deathEffect;
         this.isClicked = true;
 
-        SPARKLE_SOUND.play();
-
-        if (onClick !== null) {
+        if (onClick) {
             onClick();
         }
     }
 
     draw() {
         if (this.isClicked) {
-            return this.sparkles.draw();
+            return this.deathEffect.draw();
         } else {
             this.clickable.draw();
             return false;
@@ -36,40 +34,59 @@ class Creature {
     }
 }
 
+//Returns a random number between 0 and the upperBound
+function getRandomCoord(upperBound) {
+    return Math.floor(Math.random() * upperBound)
+}
 
-const SPARKLES_WIDTH = 200;
-const SPARKLES_HEIGHT = SPARKLES_WIDTH;
 
-class Sparkles {
-    currentFrame = 48;
+const DEATH_EFFECT_WIDTH = 200;
+const DEATH_EFFECT_HEIGHT = DEATH_EFFECT_WIDTH;
 
-    constructor(x, y) {
+class DeathEffect {
+
+    constructor(x, y, gif, numFrames, startFrame, endFrame) {
         this.x = x;
         this.y = y;
+        
+        this.gif = gif;
+        this.numFrames = numFrames;
+        this.currentFrame = startFrame;
+        this.endFrame = endFrame;
     }
 
     draw() {
-        SPARKLES_GIF.setFrame(this.currentFrame)
+        this.gif.setFrame(this.currentFrame)
         this.currentFrame++;
         
         push();
         imageMode(CENTER);  
-        image(SPARKLES_GIF, this.x, this.y, SPARKLES_WIDTH, SPARKLES_HEIGHT);
+        image(this.gif, this.x, this.y, DEATH_EFFECT_WIDTH, DEATH_EFFECT_HEIGHT);
         pop();
 
-        if (this.currentFrame === SPARKLES_FRAME_COUNT) {
+        if (this.currentFrame === this.endFrame) {
+            return true;
+        }
+        
+        if (this.currentFrame === this.numFrames) {
             this.currentFrame = 0;
         }
 
-        if (this.currentFrame === 47) {
-            return true;
-        }
         return false;
     }
 
 }
 
-//Returns a random number between 0 and the upperBound
-function getRandomCoord(upperBound) {
-    return Math.floor(Math.random() * upperBound)
+class SparklesEffect extends DeathEffect {
+    constructor(x, y) {
+        super(x, y, SPARKLES_GIF, SPARKLES_FRAME_COUNT, 48, 47);
+        SPARKLE_SOUND.play();
+    }
+}
+
+class ExplosionEffect extends DeathEffect {
+    constructor(x, y) {
+        super(x, y, EXPLOSION_GIF, EXPLOSION_FRAME_COUNT, 8, 7);
+        EXPLOSION_SOUND.play();
+    }
 }

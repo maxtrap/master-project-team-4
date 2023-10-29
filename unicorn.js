@@ -14,6 +14,10 @@ class Unicorn extends Creature {
         this.doSpin = false;
     }
 
+    click(onClick) {
+        super.click(onClick, new SparklesEffect(this.clickable.x + this.clickable.width / 2, this.clickable.y + this.clickable.height / 2));
+    }
+
     draw() {
         if (!this.isClicked) {
             this.updateImageAngle();

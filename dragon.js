@@ -20,6 +20,10 @@ class Dragon extends Creature {
         this.clickable.resize(DRAGON_WIDTH, DRAGON_HEIGHT);        
     }
 
+    click(onClick) {
+        super.click(onClick, new ExplosionEffect(this.clickable.x + this.clickable.width / 2 + this.direction * 20, this.clickable.y + this.clickable.height / 2));
+    }
+
     draw() {
         this.moveDragon();
         return super.draw();

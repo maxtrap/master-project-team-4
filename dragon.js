@@ -20,9 +20,9 @@ class Dragon extends Creature {
         this.clickable.resize(DRAGON_WIDTH, DRAGON_HEIGHT);        
     }
 
-    draw(onDissapear) {
+    draw() {
         this.moveDragon();
-        super.draw(onDissapear);
+        return super.draw();
     }
 
     moveDragon() {

@@ -14,11 +14,11 @@ class Unicorn extends Creature {
         this.doSpin = false;
     }
 
-    draw(onDissapear) {
-        super.draw(onDissapear);
+    draw() {
         if (!this.isClicked) {
             this.updateImageAngle();
         }
+        return super.draw();
     }
 
     //Rotation works. I don't know how or why. I couldn't explain it if I tried. IT WORKS DO NOT TOUCH.

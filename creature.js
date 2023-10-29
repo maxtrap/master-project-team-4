@@ -26,13 +26,12 @@ class Creature {
         }
     }
 
-    draw(onDissapear) {
+    draw() {
         if (this.isClicked) {
-            if (this.sparkles.draw() && onDissapear !== null) {
-                onDissapear();
-            }
+            return this.sparkles.draw();
         } else {
             this.clickable.draw();
+            return false;
         }
     }
 }

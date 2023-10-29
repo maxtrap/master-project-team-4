@@ -37,9 +37,9 @@ class Butterfly extends Creature {
         this.movementDirection = directions[Math.floor(Math.random() * directions.length)];
     }
 
-    draw(onDissapear) {
+    draw() {
         this.moveButterfly();
-        super.draw(onDissapear);
+        return super.draw();
     }
 
     moveButterfly() {

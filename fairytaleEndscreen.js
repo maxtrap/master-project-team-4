@@ -53,8 +53,8 @@ class FairytaleEndScreen {
         textSize(48);
         text(bodySubtext, width / 2 - 100, height / 2 + this.cardHeight * 0.05);
 
-        if (this.unicorn !== null) {
-            this.unicorn.draw(() => this.unicorn = null);
+        if (this.unicorn && this.unicorn.draw()) {
+            this.unicorn = null;
         }
     }
 

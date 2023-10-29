@@ -28,6 +28,8 @@ function initializeSparklesFrameCount() {
 class FairytaleTapper {
     
     creatures = [];
+    scoreFallingTexts = [];
+
     score = 0;
     time = GAME_LENGTH;
     isGameFinished = false;
@@ -51,9 +53,25 @@ class FairytaleTapper {
         this.drawTimer();
         this.drawLevelIndicator();
 
-        this.creatures.forEach(creature => {
-            creature.draw(() => this.creatures = this.creatures.filter(ctr => ctr != creature));
-        });
+        //Draws falling score texts. Its the little +1s that pop out from the score when you click
+        for (let i = 0; i < this.scoreFallingTexts.length; i++) {
+            let text = this.scoreFallingTexts[i];
+            text.draw();
+            if (text.isFaded()) {
+                this.scoreFallingTexts.splice(i, 1);
+                i--;
+            }
+        }
+
+        //Draws all creatures. Removes them when necessary.
+        for (let i = 0; i < this.creatures.length; i++) {
+            let creature = this.creatures[i];
+            if (creature.draw()) {
+                this.creatures.splice(i, 1);
+                i--;
+            }
+            
+        }
     }
     
 
@@ -112,6 +130,7 @@ class FairytaleTapper {
 
     onClick() {
         this.score++;
+        this.scoreFallingTexts.push(new ScoreFallingText('+1', color(0, 255, 0)));
 
         if (this.score >= SCORE_GOAL) {
             this.winGame();
@@ -180,4 +199,33 @@ function getBackground(level) {
         case 3:
             return LEVEL3_BACKGROUND;
     }
+}
+
+class ScoreFallingText {
+    constructor(content, color, x = 260, y = 80) {
+        this.x = x;
+        this.y = y;
+        this.content = content;
+        this.color = color;
+        this.opacity = 255;
+      }
+    
+      draw() {
+        fill(this.color);
+        textSize(64);
+        textAlign(CENTER);
+        text(this.content, this.x, this.y);
+
+        this.update();
+      }
+    
+      update() {
+        this.y += 2; // Control the speed of the text drop
+        this.opacity -= 4; // Control the fading speed
+        this.color.setAlpha(this.opacity);
+      }
+    
+      isFaded() {
+        return this.opacity <= 0;
+      }
 }

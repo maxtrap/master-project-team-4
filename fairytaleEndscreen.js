@@ -145,7 +145,7 @@ class FairytaleWinScreen extends FairytaleEndScreen {
         this.nextButton.defaultHeight = 100;
         this.nextButton.buttonX = width / 2 + buttonSpacing;
         this.nextButton.buttonY = height / 2 + this.cardHeight * 0.25;
-        this.nextButton.onPress = () => setScene(() => new FairytaleTapper());
+        this.nextButton.onPress = () => setScene(() => new FairytaleTapper(2));
         
         this.nextButton.text = 'Next Level';
     }

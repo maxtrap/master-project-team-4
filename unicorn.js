@@ -3,45 +3,20 @@ const UNICORN_HEIGHT = UNICORN_WIDTH * 89/106;
 const IMAGE_ROTATION_RANGE = 5;
 
 
-class Unicorn {
+class Unicorn extends Creature {
 
-    constructor(onClick = null, x = getRandomX(), y = getRandomY()) {
-        this.x = x;
-        this.y = y;
-        this.clickable = new Clickable();
-        this.clickable.locate(this.x, this.y);
+    constructor(onClick = null, x = getRandomCoord(width - UNICORN_WIDTH), y = getRandomCoord(height - UNICORN_HEIGHT)) {
+        super(onClick, x, y);
         this.clickable.image = UNICORN_IMG;
         this.clickable.resize(UNICORN_WIDTH, UNICORN_HEIGHT);
-        this.clickable.cornerRadius = 0;
-        this.clickable.strokeWeight = 0;
-        this.clickable.text = "";
-        this.clickable.color = "nofill"
-        
-        this.clickable.onPress = this.click.bind(this, onClick);
 
-        this.isClicked = false;
-        this.sparkles = new Sparkles(this.x, this.y);
         this.rotation = 0;
         this.doSpin = false;
     }
 
-    click(onClick) {
-        removeClickable(this.clickable);
-        this.isClicked = true;
-        HAPPY_UNICORN.play();
-
-        if (onClick !== null) {
-            onClick();
-        }
-    }
-
     draw(onDissapear) {
-        if (this.isClicked) {
-            if (this.sparkles.draw() && onDissapear !== null) {
-                onDissapear();
-            }
-        } else {
-            this.clickable.draw();
+        super.draw(onDissapear);
+        if (!this.isClicked) {
             this.updateImageAngle();
         }
     }
@@ -72,40 +47,6 @@ class Unicorn {
         }
     }
 
-}
-
-class Sparkles {
-    currentFrame = 48;
-
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    draw() {
-        SPARKLES_GIF.setFrame(this.currentFrame)
-        this.currentFrame++;
-        
-        image(SPARKLES_GIF, this.x, this.y, UNICORN_WIDTH, UNICORN_HEIGHT);
-        
-        if (this.currentFrame === SPARKLES_FRAME_COUNT) {
-            this.currentFrame = 0;
-        }
-
-        if (this.currentFrame === 47) {
-            return true;
-        }
-        return false;
-    }
-
-}
-
-function getRandomX() {
-    return Math.floor(Math.random() * (width - UNICORN_WIDTH))
-}
-
-function getRandomY() {
-    return Math.floor(Math.random() * (height - UNICORN_HEIGHT))
 }
 
 //Random function from the internet

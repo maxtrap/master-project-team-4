@@ -156,13 +156,20 @@ class FairytaleTapper {
         text(levelString, width - levelTextWidth - 20, 70);
     }
 
-    onClick() {
+    addScore() {
         this.score++;
         this.scoreFallingTexts.push(new ScoreFallingText('+1', color(0, 255, 0)));
 
         if (this.score >= SCORE_GOAL) {
             this.winGame();
         }
+    }
+
+    removeScore() {
+        let scoreDiff = Math.min(this.score, 5);
+        this.score -= scoreDiff;
+
+        this.scoreFallingTexts.push(new ScoreFallingText(`-${scoreDiff}`, color(255, 0, 0)));
     }
 
     onMiss() {
@@ -173,13 +180,13 @@ class FairytaleTapper {
     addCreature(creatureNumber) {
         switch(creatureNumber) {
             case 0:
-                this.creatures.push(new Unicorn(this.onClick.bind(this), this.removeCreature.bind(this)));
+                this.creatures.push(new Unicorn(this.addScore.bind(this), this.removeCreature.bind(this)));
                 break;
             case 1:
-                this.creatures.push(new Butterfly(this.onClick.bind(this), this.removeCreature.bind(this)));
+                this.creatures.push(new Butterfly(this.addScore.bind(this), this.removeCreature.bind(this)));
                 break;
             case 2:
-                this.creatures.push(new Dragon(this.onClick.bind(this), this.removeCreature.bind(this)));
+                this.creatures.push(new Dragon(this.removeScore.bind(this), this.removeCreature.bind(this)));
                 break;
         }
     }

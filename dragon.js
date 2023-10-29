@@ -21,7 +21,7 @@ class Dragon extends Creature {
     }
 
     click(onClick) {
-        super.click(onClick, new ExplosionEffect(this.clickable.x + this.clickable.width / 2 + this.direction * 20, this.clickable.y + this.clickable.height / 2));
+        super.click(onClick, new ExplosionEffect(this.clickable.x + this.clickable.width / 2 + this.direction * 30, this.clickable.y + this.clickable.height / 2));
     }
 
     draw() {

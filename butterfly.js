@@ -29,12 +29,13 @@ class Butterfly extends Creature {
 
     constructor(onClick = null, onDespawn = null, x = getRandomCoord(width - BUTTERFLY_WIDTH), y = getRandomCoord(height - BUTTERFLY_HEIGHT)) {
         super(onClick, onDespawn, x, y);
-        this.clickable.image = BUTTERFLY_GIF;
         this.clickable.resize(BUTTERFLY_WIDTH, BUTTERFLY_HEIGHT);
 
         this.movementStep = 0;
         let directions = Object.keys(this.movementMappings);
         this.movementDirection = directions[Math.floor(Math.random() * directions.length)];
+
+        this.updateButterflyImage();
     }
 
     click(onClick) {
@@ -110,6 +111,26 @@ class Butterfly extends Creature {
         if (this.movementStep >= 90) {
             this.movementStep = 0;
             this.movementDirection = this.movementMappings[this.movementDirection][Math.floor(Math.random() * 2)];
+            
+            this.updateButterflyImage();
+        }
+    }
+
+    updateButterflyImage() {
+        switch (this.movementDirection) {
+            case 'cl tr':
+            case 'cl tl':
+            case 'cc br':
+            case 'cc bl':
+                this.clickable.image = BUTTERFLY_RIGHT_GIF;
+                break;
+
+            case 'cl br':
+            case 'cl bl':
+            case 'cc tr':
+            case 'cc tl':
+                this.clickable.image = BUTTERFLY_LEFT_GIF;
+                break;
         }
     }
 }

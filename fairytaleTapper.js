@@ -13,7 +13,8 @@ let EXPLOSION_SOUND;
 
 //Creatures
 let UNICORN_IMG;
-let BUTTERFLY_GIF;
+let BUTTERFLY_RIGHT_GIF;
+let BUTTERFLY_LEFT_GIF;
 let DRAGON_RIGHT_GIF;
 let DRAGON_LEFT_GIF;
 
@@ -35,7 +36,8 @@ function fairytalePreload() {
     ANGRY_UNICORN = loadSound('resources/horse-neigh.mp3');
 
     UNICORN_IMG = loadImage('resources/unicorn.png');
-    BUTTERFLY_GIF = loadImage('resources/butterfly.gif');
+    BUTTERFLY_RIGHT_GIF = loadImage('resources/butterfly-right.gif');
+    BUTTERFLY_LEFT_GIF = loadImage('resources/butterfly-left.gif');
     DRAGON_RIGHT_GIF = loadImage('resources/dragon-right.gif');
     DRAGON_LEFT_GIF = loadImage('resources/dragon-left.gif');
     

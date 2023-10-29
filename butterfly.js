@@ -34,14 +34,12 @@ class Butterfly extends Creature {
 
         this.movementStep = 0;
         let directions = Object.keys(this.movementMappings);
-        // this.movementDirection = directions[Math.floor(Math.random() * directions.length)];
-        this.movementDirection = 'cl tr';
+        this.movementDirection = directions[Math.floor(Math.random() * directions.length)];
     }
 
     draw(onDissapear) {
-        super.draw(onDissapear);
-
         this.moveButterfly();
+        super.draw(onDissapear);
     }
 
     moveButterfly() {

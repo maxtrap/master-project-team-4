@@ -4,34 +4,25 @@ const SCORE_GOAL = 15;
 const RANDOM_INTERVAL_LOW = 1;
 const RANDOM_INTERVAL_HIGH = 2;
 
-let SPARKLE_SOUND;
-let ANGRY_UNICORN;
 
-let CORN_IMG;
-let BUTTERFLY_GIF;
-let SPARKLES_GIF;
-let LEVEL_1_BACKGROUND;
-let LEVEL_2_BACKGROUND;
-let SPARKLES_FRAME_COUNT;
-let BUTTERFLY_FRAME_COUNT;
 
 function fairytalePreload() {
     SPARKLE_SOUND = loadSound('resources/sparkle.mp3');
     ANGRY_UNICORN = loadSound('resources/horse-neigh.mp3');
 
     UNICORN_IMG = loadImage('resources/unicorn.png');
-    BUTTERFLY_GIF = loadImage('resources/butterfly.gif', initializeButterflyFrameCount);
+    BUTTERFLY_GIF = loadImage('resources/butterfly.gif');
+    DRAGON_RIGHT_GIF = loadImage('resources/dragon-right.gif');
+    DRAGON_LEFT_GIF = loadImage('resources/dragon-left.gif');
     SPARKLES_GIF = loadImage('resources/sparkles.gif', initializeSparklesFrameCount);
-    LEVEL_1_BACKGROUND = loadImage('resources/castle-background.jpg');
-    LEVEL_2_BACKGROUND = loadImage('resources/magical-forest.jpg');
+    
+    LEVEL1_BACKGROUND = loadImage('resources/magical-castle.jpg');
+    LEVEL2_BACKGROUND = loadImage('resources/magical-forest.jpg');
+    LEVEL3_BACKGROUND = loadImage('resources/haunted-castle.jpg');
 }
 
 function initializeSparklesFrameCount() {
     SPARKLES_FRAME_COUNT = SPARKLES_GIF.numFrames();
-}
-
-function initializeButterflyFrameCount() {
-    BUTTERFLY_FRAME_COUNT = BUTTERFLY_GIF.numFrames();
 }
 
 class FairytaleTapper {
@@ -131,8 +122,7 @@ class FairytaleTapper {
         ANGRY_UNICORN.play();
     }
 
-
-    //0 = unicorn, 1 = butterfly
+    //0 = unicorn, 1 = butterfly, 2 = dragon
     addCreature(creatureNumber) {
         switch(creatureNumber) {
             case 0:
@@ -140,6 +130,9 @@ class FairytaleTapper {
                 break;
             case 1:
                 this.creatures.push(new Butterfly(this.onClick.bind(this)));
+                break;
+            case 2:
+                this.creatures.push(new Dragon(this.onClick.bind(this)));
                 break;
         }
     }
@@ -181,8 +174,10 @@ function timeFormatted(timeInSeconds) {
 function getBackground(level) {
     switch (level) {
         case 1:
-            return LEVEL_1_BACKGROUND;
+            return LEVEL1_BACKGROUND;
         case 2:
-            return LEVEL_2_BACKGROUND;
+            return LEVEL2_BACKGROUND;
+        case 3:
+            return LEVEL3_BACKGROUND;
     }
 }

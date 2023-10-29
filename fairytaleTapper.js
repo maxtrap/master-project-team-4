@@ -173,15 +173,19 @@ class FairytaleTapper {
     addCreature(creatureNumber) {
         switch(creatureNumber) {
             case 0:
-                this.creatures.push(new Unicorn(this.onClick.bind(this)));
+                this.creatures.push(new Unicorn(this.onClick.bind(this), this.removeCreature.bind(this)));
                 break;
             case 1:
-                this.creatures.push(new Butterfly(this.onClick.bind(this)));
+                this.creatures.push(new Butterfly(this.onClick.bind(this), this.removeCreature.bind(this)));
                 break;
             case 2:
-                this.creatures.push(new Dragon(this.onClick.bind(this)));
+                this.creatures.push(new Dragon(this.onClick.bind(this), this.removeCreature.bind(this)));
                 break;
         }
+    }
+
+    removeCreature(creature) {
+        this.creatures = this.creatures.filter(ctr => ctr != creature);
     }
     
     generateCreatureAtRandomInterval() {

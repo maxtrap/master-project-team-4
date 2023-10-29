@@ -5,8 +5,8 @@ const IMAGE_ROTATION_RANGE = 5;
 
 class Unicorn extends Creature {
 
-    constructor(onClick = null, x = getRandomCoord(width - UNICORN_WIDTH), y = getRandomCoord(height - UNICORN_HEIGHT)) {
-        super(onClick, x, y);
+    constructor(onClick = null, onDespawn = null, x = getRandomCoord(width - UNICORN_WIDTH), y = getRandomCoord(height - UNICORN_HEIGHT)) {
+        super(onClick, onDespawn, x, y);
         this.clickable.image = UNICORN_IMG;
         this.clickable.resize(UNICORN_WIDTH, UNICORN_HEIGHT);
 

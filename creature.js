@@ -1,6 +1,8 @@
+const DESPAWN_TIME = 10;
+
 class Creature {
 
-    constructor(onClick = null, x = 0, y = 0) {
+    constructor(onClick = null, onDespawn = null, x = 0, y = 0) {
         this.clickable = new Clickable();
         this.clickable.locate(x, y);
         this.clickable.cornerRadius = 0;
@@ -11,6 +13,9 @@ class Creature {
         this.clickable.onPress = this.click.bind(this, onClick);
 
         this.isClicked = false;
+
+        this.onDespawn = onDespawn;
+        setTimeout(this.despawn.bind(this), DESPAWN_TIME * 1000);
     }
 
     click(onClick, deathEffect) {
@@ -30,6 +35,12 @@ class Creature {
         } else {
             this.clickable.draw();
             return false;
+        }
+    }
+
+    despawn() {
+        if (this.onDespawn && !this.isClicked) {
+            this.onDespawn(this);
         }
     }
 }

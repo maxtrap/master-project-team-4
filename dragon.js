@@ -2,15 +2,15 @@ const DRAGON_HEIGHT = 200;
 const DRAGON_WIDTH = DRAGON_HEIGHT * 0.91;
 
 class Dragon extends Creature {
-    constructor(onClick = null, x, y = getRandomCoord(height - DRAGON_HEIGHT)) {
+    constructor(onClick = null, onDespawn = null, x, y = getRandomCoord(height - DRAGON_HEIGHT)) {
         //Picks either 1 or -1 randomly
         let direction = Math.floor(Math.random() * 2) * 2 - 1;
         
         if (!x && x !== 0) {
-            x = width * (direction / 2 + 0.5) - DRAGON_WIDTH / 2;
+            x = width * (-direction / 2 + 0.5) - DRAGON_WIDTH / 2;
         }
         
-        super(onClick, x, y);
+        super(onClick, onDespawn, x, y);
 
         this.direction = direction;
 
@@ -31,10 +31,12 @@ class Dragon extends Creature {
 
     moveDragon() {
         this.clickable.x += this.direction * 5;
-        if (this.clickable.x < -DRAGON_WIDTH / 2) {
-            this.clickable.x = width - DRAGON_WIDTH / 2;
-        } else if(this.clickable.x > width - DRAGON_WIDTH / 2) {
-            this.clickable.x = -DRAGON_WIDTH / 2;
+        if (this.clickable.x < -DRAGON_WIDTH / 2 || this.clickable.x > width - DRAGON_WIDTH / 2) {
+            this.onDespawn(this);
         }
+    }
+
+    despawn() {
+
     }
 }

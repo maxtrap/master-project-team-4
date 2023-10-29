@@ -27,8 +27,8 @@ class Butterfly extends Creature {
         'cc tl': ['cc bl', 'cl br']
     }
 
-    constructor(onClick = null, x = getRandomCoord(width - BUTTERFLY_WIDTH), y = getRandomCoord(height - BUTTERFLY_HEIGHT)) {
-        super(onClick, x, y);
+    constructor(onClick = null, onDespawn = null, x = getRandomCoord(width - BUTTERFLY_WIDTH), y = getRandomCoord(height - BUTTERFLY_HEIGHT)) {
+        super(onClick, onDespawn, x, y);
         this.clickable.image = BUTTERFLY_GIF;
         this.clickable.resize(BUTTERFLY_WIDTH, BUTTERFLY_HEIGHT);
 

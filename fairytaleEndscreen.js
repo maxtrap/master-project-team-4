@@ -2,7 +2,7 @@ class FairytaleEndScreen {
 
     constructor(level) {
         this.level = level;
-        this.unicorn = new Unicorn(null, width / 2 + this.cardWidth * 0.25, height / 2 - UNICORN_HEIGHT / 2);
+        this.unicorn = new Unicorn(null, null, width / 2 + this.cardWidth * 0.25, height / 2 - UNICORN_HEIGHT / 2);
     }
 
     get cardWidth() {

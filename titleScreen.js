@@ -24,6 +24,8 @@ class TitleScreen {
 
   constructor() {
     this.buttons = [];
+    this.titleScreen = select("#titleScreen");
+    this.titleScreen.style("display", "flex");
     for (const [i, val] of targetButtons.entries()) {
       this.buttons.push(
         buttonFactory(
@@ -47,5 +49,9 @@ class TitleScreen {
     this.buttons.forEach((b) => {
       b.draw();
     });
+  }
+
+  destructor() {
+    this.titleScreen.style("display", "none");
   }
 }

@@ -7,6 +7,9 @@ const buttonVerticalPadding = 10;
 function setScene(sceneFactory) {
   clearClickables();
   clearMissables();
+  if (currentScene !== undefined) {
+    currentScene.destructor();
+  }
   currentScene = sceneFactory();
   frameRate(currentScene.frameRate || 60);
   playMusic();

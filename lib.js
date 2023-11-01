@@ -7,7 +7,7 @@ const buttonVerticalPadding = 10;
 function setScene(sceneFactory) {
   clearClickables();
   clearMissables();
-  if (currentScene !== undefined) {
+  if (currentScene !== undefined && currentScene.destructor) {
     currentScene.destructor();
   }
   currentScene = sceneFactory();

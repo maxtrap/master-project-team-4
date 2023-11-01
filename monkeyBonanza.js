@@ -4,15 +4,16 @@ class MonkeyBonanza {
   curveCounter = 0;
 
   constructor() {
-    createCanvas(400, 400);
+    noLoop = true;
+
     background(220);
 
     let centerX = width / 2;
     let startY = height / 2 - 50;
 
-    drawZigzagLine(centerX, startY, 300, 50, 10);
-    drawStraightLine(centerX, startY + 50, 300);
-    drawCurveLine(centerX, startY + 100, 300);
+    this.drawZigzagLine(centerX, startY, 300, 50, 10);
+    this.drawStraightLine(centerX, startY + 50, 300);
+    this.drawCurveLine(centerX, startY + 100, 300);
   }
 
   drawZigzagLine(x, y, length, separation, amplitude) {

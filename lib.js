@@ -11,7 +11,11 @@ function setScene(sceneFactory) {
     currentScene.destructor();
   }
   currentScene = sceneFactory();
-  frameRate(currentScene.frameRate || 60);
+  if (currentScene.noLoop) {
+    noLoop();
+  } else {
+    frameRate(currentScene.frameRate || 60);
+  }
   playMusic();
 }
 

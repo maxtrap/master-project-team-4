@@ -70,11 +70,10 @@ class FairytaleTapper {
   score = 0;
   time = GAME_LENGTH;
   isGameFinished = false;
+  framesTillNextSecond = 0;
 
   constructor(level = 1) {
-    frameRate(60);
     this.generateCreatureAtRandomInterval();
-    this.startTime = millis();
     this.level = level;
 
     if (localStorage.getItem("ft_highscore" + level) === null) {
@@ -125,10 +124,12 @@ class FairytaleTapper {
   }
 
   drawTimer() {
-    let currentTime = millis();
-    let elapsedTime = currentTime - this.startTime;
-
-    this.time = GAME_LENGTH - Math.floor(elapsedTime / 1000);
+    this.framesTillNextSecond++;
+    if (this.framesTillNextSecond >= 60) {
+      this.time--;
+      this.framesTillNextSecond = 0;
+    }
+    
     noStroke();
     fill(255, 200);
     rectMode(CENTER);

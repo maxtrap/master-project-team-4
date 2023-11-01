@@ -3,7 +3,6 @@ let rows;
 let columns;
 function preload() {
     data = loadTable("resources/charWordPhrase.csv", 'csv', 'header');
-    rows = data.getRows();
 }
 
 class GeckoClimber {

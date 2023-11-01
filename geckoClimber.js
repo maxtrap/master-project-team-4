@@ -9,7 +9,8 @@ function preload() {
 class GeckoClimber {
     input;
     category;
-    toBeTyped = "";
+    level;
+    toBeTyped = ""
     score = 0;
     gecko;
     geckoX = windowWidth / 1.5;
@@ -24,6 +25,7 @@ class GeckoClimber {
     
 
     constructor() {
+        this.level = "LevelOne";
         this.input = createInput();
         this.input.style('font-size', '20px');
         this.input.position(windowWidth / 2.75, 700);
@@ -31,8 +33,7 @@ class GeckoClimber {
         textAlign(CENTER);
         textSize(25);
         this.processCSVData();
-
-        console.log(data.getColumn("Characters")[12]);
+        this.toBeTyped = data.getColumn(this.level)[Math.floor(Math.random() * 26)];
     
         
     }
@@ -47,13 +48,13 @@ class GeckoClimber {
     }
 
     draw() {
-        
 
         // Setting up the game field
         background("white");
         fill("black")
         text(this.toBeTyped, this.input.x + (this.input.width) / 2, 680);
         fill("green");
+        
         //ellipse(this.input.x + (this.input.width) / 2, windowHeight / 2, 50, 50)
         this.gecko = ellipse(this.geckoX, this.geckoY, 50, 50)
         this.typingSection();
@@ -73,6 +74,7 @@ class GeckoClimber {
             if (this.input.value() == this.toBeTyped && keyCode == ENTER) {
                 keyCode = 0;
                 this.score += 10;
+                this.toBeTyped = data.getColumn(this.level)[Math.floor(Math.random() * 26)];
 
                 this.fromX = this.geckoX
                 this.fromY = this.geckoY

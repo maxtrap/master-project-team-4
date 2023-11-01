@@ -62,6 +62,8 @@ class FairytaleEndScreen {
   }
 
   drawButtons() {}
+
+
 }
 
 class EndScreenButton extends Clickable {
@@ -119,15 +121,15 @@ class FairytaleLoseScreen extends FairytaleEndScreen {
 }
 
 class FairytaleWinScreen extends FairytaleEndScreen {
-  constructor(level, timeLeft) {
+  constructor(level, time) {
     super(level);
-    this.timeLeft = timeFormatted(timeLeft);
+    this.timeLeft = timeFormatted(time);
 
     let highscore = parseInt(localStorage.getItem("ft_highscore" + level), 10);
     this.highscore = timeFormatted(highscore);
-    if (timeLeft > highscore) {
-      this.highscore = timeFormatted(timeLeft);
-      localStorage.setItem("ft_highscore" + level, timeLeft.toString());
+    if (time < highscore) {
+      this.highscore = timeFormatted(time);
+      localStorage.setItem("ft_highscore" + level, time.toString());
     }
 
     let buttonSpacing = 30;

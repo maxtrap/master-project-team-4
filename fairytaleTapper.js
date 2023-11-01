@@ -77,7 +77,7 @@ class FairytaleTapper {
     this.level = level;
 
     if (localStorage.getItem("ft_highscore" + level) === null) {
-      localStorage.setItem("ft_highscore" + level, "-1");
+      localStorage.setItem("ft_highscore" + level, "99999");
     }
 
     cl_missables.push(this.onMiss.bind(this));
@@ -129,7 +129,7 @@ class FairytaleTapper {
       this.time--;
       this.framesTillNextSecond = 0;
     }
-    
+
     noStroke();
     fill(255, 200);
     rectMode(CENTER);
@@ -248,7 +248,7 @@ class FairytaleTapper {
 
   winGame() {
     this.isGameFinished = true;
-    setScene(() => new FairytaleWinScreen(this.level, this.time));
+    setScene(() => new FairytaleWinScreen(this.level, GAME_LENGTH - this.time));
   }
 }
 

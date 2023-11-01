@@ -2,7 +2,7 @@ var targetButtons = [
   {
     text: "Fairytale Tapper",
     cb: () => {
-      setScene(new FairytaleTapper());
+      setScene(() => new FairytaleTapper());
     },
   },
   {

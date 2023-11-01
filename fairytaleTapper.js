@@ -242,12 +242,12 @@ class FairytaleTapper {
 
   loseGame() {
     this.isGameFinished = true;
-    setScene(new FairytaleLoseScreen(this.level, this.score));
+    setScene(() => new FairytaleLoseScreen(this.level, this.score));
   }
 
   winGame() {
     this.isGameFinished = true;
-    setScene(new FairytaleWinScreen(this.level, this.time));
+    setScene(() => new FairytaleWinScreen(this.level, this.time));
   }
 }
 

@@ -32,11 +32,12 @@
   <body>
     <div id="sketch"></div>
     <!-- <h1 id="title">Zoo ZEN</h1> -->
+    <div id="titleScreen"></div>
     <div id="pauseMenu">
       <h1>Paused</h1>
       <button
         type="button"
-        onClick="setScene(new TitleScreen()); togglePause()"
+        onClick="setScene(() => new TitleScreen()); togglePause()"
       >
         Return to title screen
       </button>

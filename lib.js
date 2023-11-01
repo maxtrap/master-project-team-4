@@ -32,8 +32,10 @@ function buttonFactory(x, y, text, cb) {
 function togglePause() {
   var pauseMenu = select("#pauseMenu");
   if (pauseMenu.style("display") === "none") {
+    noLoop();
     pauseMenu.style("display", "flex");
   } else {
+    loop();
     pauseMenu.style("display", "none");
   }
 }

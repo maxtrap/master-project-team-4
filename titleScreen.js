@@ -1,8 +1,8 @@
-var foo = [ //foo? Come on.  ~ Max
+var targetButtons = [
   {
     text: "Fairytale Tapper",
     cb: () => {
-      setScene(() => new FairytaleTapper());
+      setScene(new FairytaleTapper());
     },
   },
   {
@@ -20,15 +20,17 @@ var foo = [ //foo? Come on.  ~ Max
 ];
 
 class TitleScreen {
+  frameRate = 10;
+
   constructor() {
     this.buttons = [];
-    for (const [i, val] of foo.entries()) {
+    for (const [i, val] of targetButtons.entries()) {
       this.buttons.push(
         buttonFactory(
           width / 2 - buttonWidth / 2,
           height / 2 -
             buttonHeight / 2 -
-            buttonHeight * (foo.length - 1) +
+            buttonHeight * (targetButtons.length - 1) +
             (buttonHeight + buttonVerticalPadding) * i,
           val.text,
           val.cb,

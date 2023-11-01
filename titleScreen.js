@@ -42,9 +42,8 @@ class TitleScreen {
   }
 
   draw() {
-    background(255, 0, 0);
-    // randomSeed(0)
-    scribble.scribbleEllipse(width / 2, 150, width, 325);
+    background(255, 255, 255);
+    scribble.scribbleEllipse(width / 2, 150, 255, 300);
 
     this.buttons.forEach((b) => {
       b.draw();

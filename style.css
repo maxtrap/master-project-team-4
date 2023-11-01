@@ -1,5 +1,11 @@
+@font-face {
+  font-family: GrinchedRegular;
+  src: url("resources/GrinchedRegular.otf") format("opentype");
+}
+
 html,
 body {
+  font-family: GrinchedRegular;
   margin: 0;
   padding: 0;
 }

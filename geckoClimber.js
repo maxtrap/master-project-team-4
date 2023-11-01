@@ -1,19 +1,27 @@
+let data;
+let rows;
+let columns;
+function preload() {
+    data = loadTable("resources/charWordPhrase.csv", 'csv', 'header');
+    rows = data.getRows();
+}
+
 class GeckoClimber {
     input;
-    toBeTyped = "Dog";
+    category;
+    toBeTyped = "";
     score = 0;
     gecko;
     geckoX = windowWidth / 1.5;
     geckoY = 500;
+    
 
     fromX = 0
     fromY = 0
     lerpDX = 0
     lerpDY = 0
     lerp = 1.0
-
     
-
 
     constructor() {
         this.input = createInput();
@@ -22,10 +30,26 @@ class GeckoClimber {
         this.input.size(400);
         textAlign(CENTER);
         textSize(25);
+        this.processCSVData();
 
+        console.log(data.getColumn("Characters")[12]);
+    
+        
+    }
+
+
+    processCSVData() {
+        if (data) {
+            console.log('Data loaded')
+        } else {
+          console.log('CSV data not loaded.');
+        }
     }
 
     draw() {
+        
+
+        // Setting up the game field
         background("white");
         fill("black")
         text(this.toBeTyped, this.input.x + (this.input.width) / 2, 680);
@@ -34,7 +58,8 @@ class GeckoClimber {
         this.gecko = ellipse(this.geckoX, this.geckoY, 50, 50)
         this.typingSection();
         text(this.score, this.input.x + (this.input.width) / 2, 20)
-
+        
+        // Gecko movement
         if (this.lerp < 1.0) {
             this.lerp = min(1.0, this.lerp + (deltaTime / 1000))
             let eased = this.easeInOutQuad(this.lerp)

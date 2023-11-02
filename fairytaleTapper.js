@@ -31,28 +31,50 @@ let SPARKLES_FRAME_COUNT;
 let EXPLOSION_FRAME_COUNT;
 
 function fairytalePreload() {
-  SPARKLE_SOUND = loadSound("resources/sparkle.mp3");
-  EXPLOSION_SOUND = loadSound("resources/explosion.mp3");
-  ANGRY_UNICORN = loadSound("resources/horse-neigh.mp3");
-
-  UNICORN_IMG = loadImage("resources/unicorn.png");
-  BUTTERFLY_RIGHT_GIF = loadImage("resources/butterfly-right.gif");
-  BUTTERFLY_LEFT_GIF = loadImage("resources/butterfly-left.gif");
-  DRAGON_RIGHT_GIF = loadImage("resources/dragon-right.gif");
-  DRAGON_LEFT_GIF = loadImage("resources/dragon-left.gif");
-
-  SPARKLES_GIF = loadImage(
-    "resources/sparkles.gif",
-    initializeSparklesFrameCount,
+  SPARKLE_SOUND = loadSound("resources/sparkle.mp3", () =>
+    console.log("loaded sparkle"),
   );
-  EXPLOSION_GIF = loadImage(
-    "resources/explosion.gif",
-    initializeExplosionFrameCount,
+  EXPLOSION_SOUND = loadSound("resources/explosion.mp3", () =>
+    console.log("loaded explosion"),
+  );
+  ANGRY_UNICORN = loadSound("resources/horse-neigh.mp3", () =>
+    console.log("loaded horse neigh"),
   );
 
-  LEVEL1_BACKGROUND = loadImage("resources/magical-castle.jpg");
-  LEVEL2_BACKGROUND = loadImage("resources/magical-forest.jpg");
-  LEVEL3_BACKGROUND = loadImage("resources/haunted-castle.jpg");
+  UNICORN_IMG = loadImage("resources/unicorn.png", () =>
+    console.log("loaded unicorn"),
+  );
+  BUTTERFLY_RIGHT_GIF = loadImage("resources/butterfly-right.gif", () =>
+    console.log("loaded butterfly-right"),
+  );
+  BUTTERFLY_LEFT_GIF = loadImage("resources/butterfly-left.gif", () =>
+    console.log("loaded butterfly-left"),
+  );
+  DRAGON_RIGHT_GIF = loadImage("resources/dragon-right.gif", () =>
+    console.log("loaded dragon-right"),
+  );
+  DRAGON_LEFT_GIF = loadImage("resources/dragon-left.gif", () =>
+    console.log("loaded dragon-left"),
+  );
+
+  SPARKLES_GIF = loadImage("resources/sparkles.gif", () => {
+    console.log("loaded sparkles");
+    initializeSparklesFrameCount();
+  });
+  EXPLOSION_GIF = loadImage("resources/explosion.gif", () => {
+    console.log("loaded explosion");
+    initializeExplosionFrameCount();
+  });
+
+  LEVEL1_BACKGROUND = loadImage("resources/magical-castle.jpg", () =>
+    console.log("loaded magical-castle"),
+  );
+  LEVEL2_BACKGROUND = loadImage("resources/magical-forest.jpg", () =>
+    console.log("loaded magical-forest"),
+  );
+  LEVEL3_BACKGROUND = loadImage("resources/haunted-castle.jpg", () =>
+    console.log("loaded haunted-castle"),
+  );
 }
 
 function initializeSparklesFrameCount() {

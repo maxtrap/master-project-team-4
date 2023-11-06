@@ -164,7 +164,7 @@ class FairytaleWinScreen extends FairytaleEndScreen {
   drawBody() {
     super.drawBody(
       `You won! Your time: ${this.timeLeft}`,
-      `Highscore: ${this.highscore}`,
+      `Best time: ${this.highscore}`,
     );
   }
 

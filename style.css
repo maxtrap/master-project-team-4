@@ -38,10 +38,7 @@ body {
   margin: 0;
   padding: 0;
   background: green;
-}
-
-canvas {
-  display: block;
+  overflow: hidden;
 }
 
 button {
@@ -91,6 +88,7 @@ button {
 }
 
 #sketch {
+  display: block;
   position: absolute;
   top: 0;
   left: 0;
@@ -101,8 +99,6 @@ button {
 
 #titleScreen {
   display: none;
-  flex-direction: column;
-  align-items: center;
 }
 
 #pauseMenu {
@@ -123,4 +119,28 @@ button {
 
 #pauseMenu > h1 {
   background: white;
+}
+
+#tree0 {
+  image-rendering: crisp-edges;
+  transform: scale(5);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#tree2 {
+  image-rendering: crisp-edges;
+  transform: scale(5);
+  position: absolute;
+  bottom: 0;
+  left: 40vw;
+}
+
+#tree1 {
+  image-rendering: crisp-edges;
+  transform: scale(4);
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }

@@ -26,11 +26,18 @@
   src: url("resources/GrinchedRegular.otf") format("opentype");
 }
 
+@font-face {
+  font-family: Pixeboy;
+  src: url("resources/Pixeboy.ttf") format("truetype");
+}
+
 html,
 body {
-  font-family: GrinchedRegular;
+  height: 100vh;
+  font-family: Pixeboy;
   margin: 0;
   padding: 0;
+  background: green;
 }
 
 canvas {
@@ -47,15 +54,40 @@ button {
   border-style: solid;
   border-radius: 5px;
   cursor: pointer;
+  max-width: 40vw;
+}
+
+.fill {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#noise {
+  height: 100vh;
+  width: 100vw;
+  background: radial-gradient(at top center, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)),
+    url(/resources/noise.svg);
+  filter: contrast(145%) brightness(20000%) invert(100%);
+  /* mix-blend-mode: color-dodge; */
 }
 
 #title {
+  font-family: GrinchedRegular;
   width: 100%;
   text-align: center;
   font-size: 128px;
   color: var(--secondary-shade);
   -webkit-text-stroke: 2px black;
   text-stroke: 2px black;
+  z-index: 999;
 }
 
 #sketch {
@@ -64,7 +96,7 @@ button {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
+  z-index: 1;
 }
 
 #titleScreen {

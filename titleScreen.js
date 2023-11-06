@@ -7,7 +7,8 @@ class TitleScreen {
   }
 
   draw() {
-    background(255, 255, 255);
+    clear();
+    fill(250, 235, 215);
     scribble.scribbleEllipse(width / 2, 150, 255, 300);
   }
 

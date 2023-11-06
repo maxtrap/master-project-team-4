@@ -1,3 +1,26 @@
+:root {
+  /* Primary */
+  --primary-shade: #31d547;
+
+  /* Secondary */
+  --secondary-shade: #0cb277;
+
+  /* Neutral */
+  --neutral-shade: #070707;
+
+  /* Success */
+  --success-shade: #6cce1d;
+
+  /* Caution */
+  --caution-shade: #d49525;
+
+  /* Danger */
+  --danger-shade: #f6120d;
+
+  /* Info */
+  --info-shade: #2d1be6;
+}
+
 @font-face {
   font-family: GrinchedRegular;
   src: url("resources/GrinchedRegular.otf") format("opentype");
@@ -19,7 +42,7 @@ button {
   font-size: 2em;
   margin: 5px;
   padding: 10px 20px;
-  background-color: white;
+  background-color: var(--secondary-shade);
   border-color: black;
   border-style: solid;
   border-radius: 5px;
@@ -30,6 +53,9 @@ button {
   width: 100%;
   text-align: center;
   font-size: 128px;
+  color: var(--secondary-shade);
+  -webkit-text-stroke: 2px black;
+  text-stroke: 2px black;
 }
 
 #sketch {

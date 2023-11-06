@@ -2,12 +2,13 @@ function preload() {
   musicPreload();
   fairytalePreload();
   fontPreload();
+  geckoClimberPreload();
 }
 
 function setup() {
   var canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("sketch");
-  setScene(new GeckoClimber());
+  setScene(new TitleScreen());
   
 }
 

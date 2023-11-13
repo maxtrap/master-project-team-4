@@ -15,7 +15,7 @@ class MonkeyBonanza {
     this.drawStraightLine(centerX, startY + 50, 300);
     this.drawCurveLine(centerX, startY + 100, 300);
 
-    this.monkeyImage = loadImage('path/to/monkey-image.png');
+    this.monkeyImage = loadImage('path/to/Monkey_Vine');
   }
 
   drawZigzagLine(x, y, length, separation, amplitude) {

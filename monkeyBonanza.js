@@ -3,6 +3,8 @@ class MonkeyBonanza {
   straightCounter = 0;
   curveCounter = 0;
 
+  MonkeyImage;
+  
   constructor() {
     noLoop = true;
 
@@ -15,7 +17,7 @@ class MonkeyBonanza {
     this.drawStraightLine(centerX, startY + 50, 300);
     this.drawCurveLine(centerX, startY + 100, 300);
 
-    this.monkeyImage = loadImage("resources/Monkey_Vine");
+    this.monkeyImage = loadImage('resources/MonkeyVine.jpg');
   }
 
   drawZigzagLine(x, y, length, separation, amplitude) {
@@ -51,6 +53,7 @@ class MonkeyBonanza {
   }
 
   draw() {
+    image(this.monkeyImage, mouseX, mouseY, 50, 50);
     if (mouseIsPressed) {
       stroke(255, 0, 0);
       strokeWeight(2);
@@ -68,7 +71,6 @@ class MonkeyBonanza {
         }
       }
     }
-    //image(this.monkeyImage, mouseX, mouseY, 50, 50);
     if (
       this.zigzagCounter + this.straightCounter + this.curveCounter >=
       this.nextLevelThreshold

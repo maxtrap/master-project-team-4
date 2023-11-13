@@ -38,6 +38,7 @@ function fontPreload() {
 }
 
 function drawUI() {
+  textFont(defaultFont);
   currentSceneUIElements.forEach((element) => element.draw());
 }
 

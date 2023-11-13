@@ -138,7 +138,7 @@ class FairytaleTapper {
 
     noStroke();
     rectMode(CORNER);
-    fill(255, 200);
+    fill(secondaryShade + "c8")
     rect(0, 0, textWidth(scoreString) + 45, 100, 0, 0, 20, 0);
 
     fill(0);
@@ -154,7 +154,7 @@ class FairytaleTapper {
     }
 
     noStroke();
-    fill(255, 200);
+    fill(secondaryShade + "c8")
     rectMode(CENTER);
     rect(width / 2, 50, 262, TIMER_HEIGHT, 0, 0, 20, 20);
 
@@ -176,7 +176,7 @@ class FairytaleTapper {
 
     noStroke();
     rectMode(CORNER);
-    fill(255, 200);
+    fill(secondaryShade + "c8")
     rect(
       width - levelTextWidth - 45,
       0,

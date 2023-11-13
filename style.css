@@ -52,6 +52,7 @@ button {
   border-radius: 5px;
   cursor: pointer;
   max-width: 40vw;
+  z-index: 999;
 }
 
 .fill {

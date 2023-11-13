@@ -5,6 +5,7 @@ const RANDOM_INTERVAL_LOW = 1;
 const RANDOM_INTERVAL_HIGH = 2;
 
 const NUM_LEVELS = 3;
+const TIMER_HEIGHT = 150;
 
 //Soun effects
 let SPARKLE_SOUND;
@@ -155,7 +156,7 @@ class FairytaleTapper {
     noStroke();
     fill(255, 200);
     rectMode(CENTER);
-    rect(width / 2, 50, 262, 150, 0, 0, 20, 20);
+    rect(width / 2, 50, 262, TIMER_HEIGHT, 0, 0, 20, 20);
 
     textSize(100);
     fill(0);

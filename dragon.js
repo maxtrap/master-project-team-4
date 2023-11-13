@@ -2,7 +2,7 @@ const DRAGON_HEIGHT = 200;
 const DRAGON_WIDTH = DRAGON_HEIGHT * 0.91;
 
 class Dragon extends Creature {
-    constructor(onClick = null, onDespawn = null, x, y = getRandomCoord(height - DRAGON_HEIGHT)) {
+    constructor(onClick = null, onDespawn = null, x, y = TIMER_HEIGHT + getRandomCoord(height - DRAGON_HEIGHT - TIMER_HEIGHT)) {
         //Picks either 1 or -1 randomly
         let direction = Math.floor(Math.random() * 2) * 2 - 1;
         

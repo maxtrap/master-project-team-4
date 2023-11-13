@@ -1,5 +1,5 @@
 const GAME_LENGTH = 60;
-const SCORE_GOAL = 1;
+const SCORE_GOAL = 20;
 
 const RANDOM_INTERVAL_LOW = 1;
 const RANDOM_INTERVAL_HIGH = 2;

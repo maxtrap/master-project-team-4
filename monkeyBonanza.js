@@ -24,6 +24,16 @@ class MonkeyBonanza {
 
     this.monkeyImage = loadImage('resources/MonkeyVine.jpg');
   }
+  drawTreeOutline(x, y) {
+    // Draw tree outline with branches
+    stroke(0);
+    strokeWeight(2);
+    line(x, y, x, y - 60); // Main trunk
+    line(x, y - 30, x - 20, y - 60); // Left branch
+    line(x, y - 30, x + 20, y - 60); // Right branch
+    line(x, y - 40, x - 15, y - 40); // Left middle branch
+    line(x, y - 40, x + 15, y - 40); // Right middle branch
+  }
 
   drawZigzagLine(x, y, length, separation, amplitude) {
     let numSegments = int(length / separation);
@@ -85,7 +95,7 @@ class MonkeyBonanza {
     const rectangleDistance = this.calculateDistance(x, y + 30, mouseX, mouseY);
     return circleDistance < 30 || (rectangleDistance < 30 && mouseY > y + 30);
   }
-
+  
   draw() {
     background(220);
 
@@ -140,6 +150,7 @@ class MonkeyBonanza {
       // Update the next level threshold (adjust as needed)
       this.nextLevelThreshold += 5;
     }
+    
 
     // Display the counters and accuracy on the canvas
     fill(0);
@@ -157,6 +168,9 @@ class MonkeyBonanza {
       20,
       100
     );
+    if (this.currentLevel === 3) {
+      this.drawTreeOutline(mouseX, mouseY);
+    }
   }
 
   zigzagPath(x) {

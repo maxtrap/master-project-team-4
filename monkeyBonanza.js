@@ -15,7 +15,7 @@ class MonkeyBonanza {
     this.drawStraightLine(centerX, startY + 50, 300);
     this.drawCurveLine(centerX, startY + 100, 300);
 
-    this.monkeyImage = loadImage('path/to/Monkey_Vine');
+    this.monkeyImage = loadImage("resources/Monkey_Vine");
   }
 
   drawZigzagLine(x, y, length, separation, amplitude) {
@@ -48,8 +48,6 @@ class MonkeyBonanza {
       vertex(x + i, y + yOffset);
     }
     endShape();
-
-
   }
 
   draw() {
@@ -71,23 +69,24 @@ class MonkeyBonanza {
       }
     }
     //image(this.monkeyImage, mouseX, mouseY, 50, 50);
-    if (this.zigzagCounter + this.straightCounter + this.curveCounter >= this.nextLevelThreshold) {
-        // Reset counters
-        this.zigzagCounter = 0;
-        this.straightCounter = 0;
-        this.curveCounter = 0;
+    if (
+      this.zigzagCounter + this.straightCounter + this.curveCounter >=
+      this.nextLevelThreshold
+    ) {
+      // Reset counters
+      this.zigzagCounter = 0;
+      this.straightCounter = 0;
+      this.curveCounter = 0;
 
-        // Increase the level
-        this.currentLevel++;
+      // Increase the level
+      this.currentLevel++;
 
-        // Clear the canvas
-        background(220);
+      // Clear the canvas
+      background(220);
 
-        // Update the next level threshold (adjust as needed)
-        this.nextLevelThreshold += 5;
-      }
+      // Update the next level threshold (adjust as needed)
+      this.nextLevelThreshold += 5;
     }
-
     // Display the counters on the canvas
     fill(0);
     textSize(16);

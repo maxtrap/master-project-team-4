@@ -1,5 +1,5 @@
 const GAME_LENGTH = 60;
-const SCORE_GOAL = 20;
+const SCORE_GOAL = 1;
 
 const RANDOM_INTERVAL_LOW = 1;
 const RANDOM_INTERVAL_HIGH = 2;
@@ -136,10 +136,13 @@ class FairytaleTapper {
     let scoreString = `Score: ${this.score}/${SCORE_GOAL}`;
     textSize(64);
 
-    noStroke();
+    push();
+    strokeWeight(3);
+    stroke(0);
     rectMode(CORNER);
     fill(secondaryShade + "c8")
-    rect(0, 0, textWidth(scoreString) + 45, 100, 0, 0, 20, 0);
+    rect(-10, -10, textWidth(scoreString) + 55, 110, 0, 0, 20, 0);
+    pop();
 
     fill(0);
     textAlign(LEFT);
@@ -153,10 +156,13 @@ class FairytaleTapper {
       this.framesTillNextSecond = 0;
     }
 
-    noStroke();
+    push();
+    strokeWeight(3);
+    stroke(0);
     fill(secondaryShade + "c8")
     rectMode(CENTER);
     rect(width / 2, 50, 262, TIMER_HEIGHT, 0, 0, 20, 20);
+    pop();
 
     textSize(100);
     fill(0);
@@ -174,19 +180,14 @@ class FairytaleTapper {
     textSize(64);
     let levelTextWidth = textWidth(levelString);
 
-    noStroke();
+    push();
+    strokeWeight(3);
+    stroke(0);
     rectMode(CORNER);
     fill(secondaryShade + "c8")
-    rect(
-      width - levelTextWidth - 45,
-      0,
-      textWidth(levelString) + 45,
-      100,
-      0,
-      0,
-      0,
-      20,
-    );
+    rect(width - levelTextWidth - 55,-10,textWidth(levelString) + 55,110,
+      0,0,0,20);
+    pop();
 
     fill(0);
     textAlign(LEFT);

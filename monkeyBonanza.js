@@ -56,6 +56,13 @@ class MonkeyBonanza {
     }
     endShape();
   }
+  drawMonkeyOutline(x, y) {
+    // Draw monkey outline (circle with rectangle below)
+    stroke(0);
+    strokeWeight(2);
+    ellipse(x, y, 60, 60); // Circle for head
+    rect(x - 30, y + 30, 60, 40); // Rectangle for body
+  }
 
   calculateDistance(x1, y1, x2, y2) {
     return dist(x1, y1, x2, y2);

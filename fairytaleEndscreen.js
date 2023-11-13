@@ -32,7 +32,7 @@ class FairytaleEndScreen {
 
     push();
     rectMode(CENTER);
-    fill(0, 255, 228);
+    fill(secondaryShade);
     stroke(0);
     strokeWeight(2);
     rect(titleX, titleY, this.cardWidth - 80, titleHeight, 20);
@@ -82,12 +82,13 @@ class EndScreenButton extends Clickable {
       this.locate(this.buttonX - 5, this.buttonY - 5);
     };
 
-    this.color = "#FF9CC7";
+    this.color = secondaryShade;
     this.diagonalCorners = true;
     this.cornerRadius = 20;
     this.strokeWeight = 2;
 
     this.onPress = onPress;
+    this.textFont = defaultFont;
   }
 }
 

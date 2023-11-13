@@ -6,6 +6,7 @@ class MonkeyBonanza {
   monkeyImage;
   currentLevel = 1;
   nextLevelThreshold = 5; // Number of strokes to reach the next level
+  levelsCompleted = 0;
 
   preload() {
     this.rainforestImage = loadImage('resources/Rainforest.jpeg');
@@ -23,6 +24,17 @@ class MonkeyBonanza {
     this.drawCurveLine(centerX, startY + 100, 300);
 
     this.monkeyImage = loadImage('resources/MonkeyVine.jpg');
+  }
+
+  drawTreeOutline(x, y) {
+    // Draw tree outline with branches
+    stroke(0);
+    strokeWeight(2);
+    line(x, y, x, y - 60); // Main trunk
+    line(x, y - 30, x - 20, y - 60); // Left branch
+    line(x, y - 30, x + 20, y - 60); // Right branch
+    line(x, y - 40, x - 15, y - 40); // Left middle branch
+    line(x, y - 40, x + 15, y - 40); // Right middle branch
   }
 
   drawZigzagLine(x, y, length, separation, amplitude) {
@@ -126,6 +138,13 @@ class MonkeyBonanza {
 
       // Update the next level threshold (adjust as needed)
       this.nextLevelThreshold += 5;
+
+      // Check if all levels completed
+      if (this.currentLevel > 3) {
+        this.levelsCompleted++;
+        this.currentLevel = 1;
+        this.nextLevelThreshold = 5;
+      }
     }
 
     // Display the counters and accuracy on the canvas
@@ -135,6 +154,7 @@ class MonkeyBonanza {
     text(`Straight Counter: ${this.straightCounter}`, 20, 40);
     text(`Curve Counter: ${this.curveCounter}`, 20, 60);
     text(`Current Level: ${this.currentLevel}`, 20, 80);
+    text(`Levels Completed: ${this.levelsCompleted}`, 20, 100);
     text(
       `Accuracy: ${Math.round(
         ((this.zigzagCounter + this.straightCounter + this.curveCounter) /
@@ -142,8 +162,13 @@ class MonkeyBonanza {
           100
       )}%`,
       20,
-      100
+      120
     );
+
+    // Draw the specific shape for the current level
+    if (this.currentLevel === 3) {
+      this.drawTreeOutline(mouseX, mouseY);
+    }
   }
 
   zigzagPath(x) {
@@ -160,3 +185,6 @@ class MonkeyBonanza {
     return height / 2 + 100 + 30 * sin((x - (width / 2 - 150)) / 30);
   }
 }
+
+// Instantiate the MonkeyBonanza class
+const monkeyBonanza = new MonkeyBonanza();

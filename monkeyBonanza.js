@@ -6,6 +6,7 @@ class MonkeyBonanza {
   monkeyImage;
   currentLevel = 1;
   nextLevelThreshold = 5; // Number of strokes to reach the next level
+  levelsCompleted = 0;
 
   preload() {
     this.rainforestImage = loadImage('resources/Rainforest.jpeg');
@@ -24,6 +25,7 @@ class MonkeyBonanza {
 
     this.monkeyImage = loadImage('resources/MonkeyVine.jpg');
   }
+
   drawTreeOutline(x, y) {
     // Draw tree outline with branches
     stroke(0);
@@ -66,13 +68,6 @@ class MonkeyBonanza {
     }
     endShape();
   }
-  drawMonkeyOutline(x, y) {
-    // Draw monkey outline (circle with rectangle below)
-    stroke(0);
-    strokeWeight(2);
-    ellipse(x, y, 60, 60); // Circle for head
-    rect(x - 30, y + 30, 60, 40); // Rectangle for body
-  }
 
   calculateDistance(x1, y1, x2, y2) {
     return dist(x1, y1, x2, y2);
@@ -89,13 +84,7 @@ class MonkeyBonanza {
     }
     return true;
   }
-  isWithinMonkeyOutline(x, y) {
-    // Check if the drawn point is within a threshold distance of the monkey's outline
-    const circleDistance = this.calculateDistance(x, y, mouseX, mouseY);
-    const rectangleDistance = this.calculateDistance(x, y + 30, mouseX, mouseY);
-    return circleDistance < 30 || (rectangleDistance < 30 && mouseY > y + 30);
-  }
-  
+
   draw() {
     background(220);
 
@@ -149,8 +138,14 @@ class MonkeyBonanza {
 
       // Update the next level threshold (adjust as needed)
       this.nextLevelThreshold += 5;
+
+      // Check if all levels completed
+      if (this.currentLevel > 3) {
+        this.levelsCompleted++;
+        this.currentLevel = 1;
+        this.nextLevelThreshold = 5;
+      }
     }
-    
 
     // Display the counters and accuracy on the canvas
     fill(0);
@@ -159,6 +154,7 @@ class MonkeyBonanza {
     text(`Straight Counter: ${this.straightCounter}`, 20, 40);
     text(`Curve Counter: ${this.curveCounter}`, 20, 60);
     text(`Current Level: ${this.currentLevel}`, 20, 80);
+    text(`Levels Completed: ${this.levelsCompleted}`, 20, 100);
     text(
       `Accuracy: ${Math.round(
         ((this.zigzagCounter + this.straightCounter + this.curveCounter) /
@@ -166,8 +162,10 @@ class MonkeyBonanza {
           100
       )}%`,
       20,
-      100
+      120
     );
+
+    // Draw the specific shape for the current level
     if (this.currentLevel === 3) {
       this.drawTreeOutline(mouseX, mouseY);
     }
@@ -187,3 +185,6 @@ class MonkeyBonanza {
     return height / 2 + 100 + 30 * sin((x - (width / 2 - 150)) / 30);
   }
 }
+
+// Instantiate the MonkeyBonanza class
+const monkeyBonanza = new MonkeyBonanza();

@@ -65,10 +65,10 @@ function togglePause() {
   if (currentScene instanceof TitleScreen) return;
   var pauseMenu = select("#pauseMenu");
   if (pauseMenu.style("display") === "none") {
-    noLoop();
+    if (!currentScene.noLoop) noLoop();
     pauseMenu.style("display", "flex");
   } else {
-    loop();
+    if (!currentScene.noLoop) loop();
     pauseMenu.style("display", "none");
   }
 }

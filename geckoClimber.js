@@ -1,5 +1,5 @@
-var geckoClimber = {
-    draw: () => {
-        ellipse(width / 2, height / 2, 40);
-    },
-};
+class GeckoClimber {
+  draw() {
+    ellipse(width / 2, height / 2, 40);
+  }
+}

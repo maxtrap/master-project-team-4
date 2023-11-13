@@ -7,6 +7,10 @@ class MonkeyBonanza {
   currentLevel = 1;
   nextLevelThreshold = 5; // Number of strokes to reach the next level
 
+  preload() {
+    this.rainforestImage = loadImage('resources/Rainforest.jpeg');
+  }
+
   constructor() {
     noLoop();
     background(220);

@@ -1,6 +1,7 @@
 function preload() {
   musicPreload();
   fairytalePreload();
+  fontPreload();
 }
 
 function setup() {
@@ -11,6 +12,7 @@ function setup() {
 
 function draw() {
   currentScene.draw();
+  drawUI();
 }
 
 function windowResized() {

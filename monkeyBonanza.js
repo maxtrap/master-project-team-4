@@ -79,6 +79,12 @@ class MonkeyBonanza {
     }
     return true;
   }
+  isWithinMonkeyOutline(x, y) {
+    // Check if the drawn point is within a threshold distance of the monkey's outline
+    const circleDistance = this.calculateDistance(x, y, mouseX, mouseY);
+    const rectangleDistance = this.calculateDistance(x, y + 30, mouseX, mouseY);
+    return circleDistance < 30 || (rectangleDistance < 30 && mouseY > y + 30);
+  }
 
   draw() {
     background(220);

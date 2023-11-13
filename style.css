@@ -39,6 +39,9 @@ body {
   padding: 0;
   background: green;
   overflow: hidden;
+  display: flex;
+  justify-content: center; /* Aligns horizontally */
+  align-items: center; /* Aligns vertically */
 }
 
 button {
@@ -144,4 +147,9 @@ button {
   position: absolute;
   bottom: 0;
   right: 0;
+}
+
+#p5_loading {
+  text-align: center;
+  font-size: 8rem;
 }

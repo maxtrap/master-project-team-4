@@ -1,20 +1,24 @@
 let TYPING_DATA;
 let GECKO_IMAGE;
-let TREE;
 let BACKGROUND_LEVELONE;
 let BACKGROUNDS = [];
+let STRUCTURES = [];
 let LEVEL_DIFFICULTY = ["LevelOne", "LevelTwo", "LevelThree"];
 
 
 function geckoClimberPreload() {
     TYPING_DATA = loadTable("resources/charWordPhrase.csv", 'csv', 'header');
-    GECKO_IMAGE = loadImage("resources/gecko.png");
+    GECKO_IMAGE = loadImage("resources/gecko.gif");
     TREE = loadImage("resources/Rock.png");
     FLAG = loadImage("resources/Flag.png")
     BACKGROUND_LEVELONE = loadImage('resources/Forest.jpg');
+    STRUCTURE_LEVELONE = loadImage('resources/Rock.png');
     BACKGROUND_LEVELTWO = loadImage('resources/Desert.jpg');
+    STRUCTURE_LEVELTWO = loadImage('resources/Pyramids.png')
     BACKGROUND_LEVELTHREE = loadImage('resources/Wasteland.jpg');
+    STRUCTURE_LEVELTHREE = loadImage('resources/volcano.png');
     BACKGROUNDS = [BACKGROUND_LEVELONE, BACKGROUND_LEVELTWO, BACKGROUND_LEVELTHREE];
+    STRUCTURES = [STRUCTURE_LEVELONE, STRUCTURE_LEVELTWO, STRUCTURE_LEVELTHREE];
 }
 
 function getRandomBetween(min, max) {
@@ -95,7 +99,7 @@ class GeckoClimber {
         textSize(40);
 
         this.typingSection();
-        image(TREE, 280, 60, 900, 700);
+        image(STRUCTURES[this.level], 280, 60, 900, 700);
         image(FLAG, this.geckoMoveLocation9.xPosition, this.geckoMoveLocation9.yPosition, 100, 100);
         
         text(this.toBeTyped, this.input.x + (this.input.width) / 2, 680);
@@ -155,6 +159,7 @@ class GeckoClimber {
     }
 
     geckoAnimation(){
+
     }
 
     checkForNextLevel(){

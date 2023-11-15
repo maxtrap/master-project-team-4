@@ -165,3 +165,7 @@ button {
   text-align: center;
   font-size: 8rem;
 }
+
+input {
+  z-index: 2;
+}

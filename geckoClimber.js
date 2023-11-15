@@ -30,14 +30,14 @@ function getRandomBetween(min, max) {
 class GeckoClimber {
 
     geckoMoveLocation1 = new geckoMovementLocation(1000, 600);
-    geckoMoveLocation2 = new geckoMovementLocation(getRandomBetween(950, 620), 560);
-    geckoMoveLocation3 = new geckoMovementLocation(getRandomBetween(950, 620), 510);
-    geckoMoveLocation4 = new geckoMovementLocation(getRandomBetween(950, 620), 440);
-    geckoMoveLocation5 = new geckoMovementLocation(getRandomBetween(950, 620), 380);
-    geckoMoveLocation6 = new geckoMovementLocation(getRandomBetween(950, 620), 310);
-    geckoMoveLocation7 = new geckoMovementLocation(getRandomBetween(950, 620), 250);
-    geckoMoveLocation8 = new geckoMovementLocation(getRandomBetween(950, 620), 150);
-    geckoMoveLocation9 = new geckoMovementLocation(510, 40);
+    geckoMoveLocation2 = new geckoMovementLocation(getRandomBetween(500,800), 560);
+    geckoMoveLocation3 = new geckoMovementLocation(getRandomBetween(500, 800), 510);
+    geckoMoveLocation4 = new geckoMovementLocation(getRandomBetween(500, 800), 440);
+    geckoMoveLocation5 = new geckoMovementLocation(getRandomBetween(500, 800), 380);
+    geckoMoveLocation6 = new geckoMovementLocation(getRandomBetween(500, 800), 310);
+    geckoMoveLocation7 = new geckoMovementLocation(getRandomBetween(500, 800), 250);
+    geckoMoveLocation8 = new geckoMovementLocation(getRandomBetween(500, 800), 150);
+    geckoMoveLocation9 = new geckoMovementLocation(700, 100);
 
     
     movementIndex = 0;
@@ -51,7 +51,8 @@ class GeckoClimber {
     geckoX;
     geckoY;
     swayAmount;
-    level = 0;
+    //Change BACK TO 0
+    level = 2;
     
 
     fromX = 0
@@ -63,8 +64,8 @@ class GeckoClimber {
 
     constructor() {
         this.input = createInput();
-        this.input.style('font-size', '20px');
-        this.input.position(windowWidth / 2.75, 700);
+        this.input.style('font-size', '30px');
+        this.input.position(windowWidth / 2.55, 700);
         this.input.size(400);
         textAlign(CENTER);
         textSize(25);
@@ -74,8 +75,8 @@ class GeckoClimber {
 
         this.moveLocationXPositions = [this.geckoMoveLocation1.xPosition, this.geckoMoveLocation2.xPosition, this.geckoMoveLocation3.xPosition, this.geckoMoveLocation4.xPosition, this.geckoMoveLocation5.xPosition, this.geckoMoveLocation6.xPosition, this.geckoMoveLocation7.xPosition, this.geckoMoveLocation8.xPosition, this.geckoMoveLocation9.xPosition];
         this.moveLocationYPositions = [this.geckoMoveLocation1.yPosition, this.geckoMoveLocation2.yPosition, this.geckoMoveLocation3.yPosition, this.geckoMoveLocation4.yPosition, this.geckoMoveLocation5.yPosition, this.geckoMoveLocation6.yPosition, this.geckoMoveLocation7.yPosition, this.geckoMoveLocation8.yPosition, this.geckoMoveLocation9.yPosition];
-        this.geckoX = this.moveLocationXPositions[0];
-        this.geckoY = this.moveLocationYPositions[0];
+        this.geckoX = this.moveLocationXPositions[8];
+        this.geckoY = this.moveLocationYPositions[8];
 
     }
 
@@ -110,6 +111,7 @@ class GeckoClimber {
         
         //Check for nextLevel
         this.checkForNextLevel();
+        this.checkForEndGame();
         
         
         // Gecko movement
@@ -151,11 +153,11 @@ class GeckoClimber {
     geckoSmoothMovement(){
         // Allows smooth movement of the gecko to each of the designated locations
         
-        this.fromX = this.geckoX
-        this.fromY = this.geckoY
-        this.lerp = 0.0
-        this.lerpDX = this.moveLocationXPositions[this.movementIndex] - this.fromX
-        this.lerpDY = this.moveLocationYPositions[this.movementIndex] - this.fromY
+        this.fromX = this.geckoX;
+        this.fromY = this.geckoY;
+        this.lerp = 0.0;
+        this.lerpDX = this.moveLocationXPositions[this.movementIndex] - this.fromX;
+        this.lerpDY = this.moveLocationYPositions[this.movementIndex] - this.fromY;
     }
 
     geckoAnimation(){
@@ -163,12 +165,25 @@ class GeckoClimber {
     }
 
     checkForNextLevel(){
-        if (this.geckoX == this.geckoMoveLocation9.xPosition && this.geckoY == this.geckoMoveLocation9.yPosition){
-            this.level += 1;
+        if (this.geckoY <= this.geckoMoveLocation9.yPosition){
+            this.level++;
             this.movementIndex = 0;
             this.geckoX = this.moveLocationXPositions[this.movementIndex];
             this.geckoY = this.moveLocationYPositions[this.movementIndex];
             this.toBeTyped = TYPING_DATA.getColumn(LEVEL_DIFFICULTY[this.level])[Math.floor(Math.random() * 26)];
+            console.log("Next Level");
+        }
+    }
+
+    checkForEndGame(){
+        if (this.level > 2){
+            this.input.remove();
+            fill("Green");
+            square(windowWidth / 2.75, 150, 500, 30);
+            fill("Black");
+            textAlign("CENTER");
+            text("Congrats. You Win!", this.input.x + (this.input.width) / 2, 300);
+        
         }
     }
 

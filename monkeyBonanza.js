@@ -186,5 +186,3 @@ class MonkeyBonanza {
   }
 }
 
-// Instantiate the MonkeyBonanza class
-const monkeyBonanza = new MonkeyBonanza();

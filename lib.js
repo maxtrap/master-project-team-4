@@ -62,9 +62,9 @@ function updateUIElementText(index, text) {
 }
 
 function togglePause() {
-  if (currentScene instanceof TitleScreen) return;
   var pauseMenu = select("#pauseMenu");
   if (pauseMenu.style("display") === "none") {
+    if (currentScene instanceof TitleScreen) return;
     if (!currentScene.noLoop) noLoop();
     pauseMenu.style("display", "flex");
   } else {

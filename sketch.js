@@ -8,8 +8,7 @@ function preload() {
 function setup() {
   var canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("sketch");
-  setScene(new TitleScreen());
-  
+  setScene(() => new TitleScreen());
 }
 
 function draw() {

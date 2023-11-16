@@ -3,6 +3,7 @@ function preload() {
   fairytalePreload();
   fontPreload();
   geckoClimberPreload();
+  monkeyBonanzaPreload();
 }
 
 function setup() {

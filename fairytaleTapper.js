@@ -248,7 +248,7 @@ class FairytaleTapper {
   }
 
   generateCreatureAtRandomInterval() {
-    if (this.creatures.length <= 10) {
+    if (this.creatures.length <= 10 && pauseMenuDisplay() === "none") {
       this.addCreature(Math.floor(Math.random() * this.level));
     }
     // Generate a random time interval between 3 and 5 seconds (in milliseconds)

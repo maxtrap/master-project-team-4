@@ -8,7 +8,7 @@ let LEVEL_DIFFICULTY = ["LevelOne", "LevelTwo", "LevelThree"];
 
 function geckoClimberPreload() {
     TYPING_DATA = loadTable("resources/charWordPhrase.csv", 'csv', 'header');
-    GECKO_IMAGE = loadImage("resources/gecko.gif");
+    GECKO_IMAGE = loadImage("resources/newGecko.gif");
     TREE = loadImage("resources/Rock.png");
     FLAG = loadImage("resources/Flag.png")
     BACKGROUND_LEVELONE = loadImage('resources/Forest.jpg');
@@ -17,6 +17,7 @@ function geckoClimberPreload() {
     STRUCTURE_LEVELTWO = loadImage('resources/Pyramids.png')
     BACKGROUND_LEVELTHREE = loadImage('resources/Wasteland.jpg');
     STRUCTURE_LEVELTHREE = loadImage('resources/volcano.png');
+    MUSIC_LEVELONE = loadSound('resources/BloonsTD5.mp3');
     BACKGROUNDS = [BACKGROUND_LEVELONE, BACKGROUND_LEVELTWO, BACKGROUND_LEVELTHREE];
     STRUCTURES = [STRUCTURE_LEVELONE, STRUCTURE_LEVELTWO, STRUCTURE_LEVELTHREE];
 }
@@ -52,7 +53,7 @@ class GeckoClimber {
     geckoY;
     swayAmount;
     //Change BACK TO 0
-    level = 2;
+    level = 0;
     
 
     fromX = 0
@@ -60,11 +61,14 @@ class GeckoClimber {
     lerpDX = 0
     lerpDY = 0
     lerp = 1.0
+    borderRadius = 5;
     
 
     constructor() {
+        MUSIC_LEVELONE.play();
         this.input = createInput();
         this.input.style('font-size', '30px');
+        this.input.style('border-color','white');
         this.input.position(windowWidth / 2.55, 700);
         this.input.size(400);
         textAlign(CENTER);
@@ -75,8 +79,8 @@ class GeckoClimber {
 
         this.moveLocationXPositions = [this.geckoMoveLocation1.xPosition, this.geckoMoveLocation2.xPosition, this.geckoMoveLocation3.xPosition, this.geckoMoveLocation4.xPosition, this.geckoMoveLocation5.xPosition, this.geckoMoveLocation6.xPosition, this.geckoMoveLocation7.xPosition, this.geckoMoveLocation8.xPosition, this.geckoMoveLocation9.xPosition];
         this.moveLocationYPositions = [this.geckoMoveLocation1.yPosition, this.geckoMoveLocation2.yPosition, this.geckoMoveLocation3.yPosition, this.geckoMoveLocation4.yPosition, this.geckoMoveLocation5.yPosition, this.geckoMoveLocation6.yPosition, this.geckoMoveLocation7.yPosition, this.geckoMoveLocation8.yPosition, this.geckoMoveLocation9.yPosition];
-        this.geckoX = this.moveLocationXPositions[8];
-        this.geckoY = this.moveLocationYPositions[8];
+        this.geckoX = this.moveLocationXPositions[0];
+        this.geckoY = this.moveLocationYPositions[0];
 
     }
 
@@ -94,16 +98,33 @@ class GeckoClimber {
     }
 
     draw() {
+
+        
         // Setting up the game field
         background(BACKGROUNDS[this.level]);
+        
+        
         fill("white")
         textSize(40);
-
+        
+       
         this.typingSection();
         image(STRUCTURES[this.level], 280, 60, 900, 700);
         image(FLAG, this.geckoMoveLocation9.xPosition, this.geckoMoveLocation9.yPosition, 100, 100);
         
-        text(this.toBeTyped, this.input.x + (this.input.width) / 2, 680);
+        push()
+        stroke(0);
+        noFill();
+        strokeWeight(30);
+        rect(0,0,width,height);
+        pop()
+        
+        //Text that shows the user what to type and the border around the input box
+        text(("Type: " + this.toBeTyped), this.input.x + (this.input.width) / 2, 680);
+        fill("black");
+        rect(this.input.x - this.borderRadius, this.input.y - this.borderRadius, this.input.width + 2 * this.borderRadius, this.input.height + 2 * this.borderRadius, this.borderRadius);
+
+
 
         // Creating the gecko
         this.swayAmount = sin(frameCount * 0.1) * 10;

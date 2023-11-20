@@ -91,7 +91,7 @@ class MonkeyBonanza {
     }
 
     this.drawMonkey();
-    drawLevelIndicator(this.currentLevel);
+    drawLevelIndicator(this.currentLevel + 1);
   }
 
   drawPathway(pathFunction) {

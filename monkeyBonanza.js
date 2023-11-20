@@ -4,8 +4,13 @@ const MONKEY_SIZE = 150;
 const BANANA_SIZE = 75;
 const PATHWAY_GROUPS = [
   [
+    function wave(x) {
+      return height / 2 + 50 * Math.sin((x - width / 2) / 50);
+    },
+  ],
+  [
     function circleBottom(x) {
-      let radius = 100;
+      let radius = 250;
       let centerX = width / 2; // Calculate the center x-coordinate
       let centerY = height / 2;
       let deltaX = x - centerX; // Find the horizontal distance from the center
@@ -19,7 +24,7 @@ const PATHWAY_GROUPS = [
       return centerY + Math.sqrt(radius * radius - deltaX * deltaX);
     },
     function circleTop(x) {
-      let radius = 100;
+      let radius = 250;
       let centerX = width / 2; // Calculate the center x-coordinate
       let centerY = height / 2;
       let deltaX = x - centerX; // Find the horizontal distance from the center
@@ -31,26 +36,6 @@ const PATHWAY_GROUPS = [
 
       // Calculate the y-coordinate for the top half of the circle
       return centerY - Math.sqrt(radius * radius - deltaX * deltaX);
-    },
-  ],
-  [
-    function zigzagPath(x) {
-      return (
-        height / 2 -
-        50 -
-        100 * sin((x - (width / 2 - 150)) / 25) +
-        10 * sin((x - (width / 2 - 150)) / 12)
-      );
-    },
-  ],
-  [
-    function straightPath(x) {
-      return height / 2 + 50;
-    },
-  ],
-  [
-    function curvePath(x) {
-      return height / 2 + 100 + 30 * sin((x - (width / 2 - 150)) / 30);
     },
   ],
 ];

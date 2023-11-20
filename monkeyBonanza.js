@@ -2,6 +2,58 @@ const TRACE_THRESHOLD = 30;
 const LERP_AMOUNT = 0.2;
 const MONKEY_SIZE = 150;
 const BANANA_SIZE = 75;
+const PATHWAY_GROUPS = [
+  [
+    function circleBottom(x) {
+      let radius = 100;
+      let centerX = width / 2; // Calculate the center x-coordinate
+      let centerY = height / 2;
+      let deltaX = x - centerX; // Find the horizontal distance from the center
+
+      // Check if the x-coordinate is within the circle's diameter
+      if (Math.abs(deltaX) > radius) {
+        return null; // The point is outside the circle
+      }
+
+      // Calculate the y-coordinate relative to the center of the screen
+      return centerY + Math.sqrt(radius * radius - deltaX * deltaX);
+    },
+    function circleTop(x) {
+      let radius = 100;
+      let centerX = width / 2; // Calculate the center x-coordinate
+      let centerY = height / 2;
+      let deltaX = x - centerX; // Find the horizontal distance from the center
+
+      // Check if the x-coordinate is within the circle's diameter
+      if (Math.abs(deltaX) > radius) {
+        return null; // The point is outside the circle
+      }
+
+      // Calculate the y-coordinate for the top half of the circle
+      return centerY - Math.sqrt(radius * radius - deltaX * deltaX);
+    },
+  ],
+  [
+    function zigzagPath(x) {
+      return (
+        height / 2 -
+        50 -
+        100 * sin((x - (width / 2 - 150)) / 25) +
+        10 * sin((x - (width / 2 - 150)) / 12)
+      );
+    },
+  ],
+  [
+    function straightPath(x) {
+      return height / 2 + 50;
+    },
+  ],
+  [
+    function curvePath(x) {
+      return height / 2 + 100 + 30 * sin((x - (width / 2 - 150)) / 30);
+    },
+  ],
+];
 
 let MONKEY_IMAGE;
 let BACKGROUND_ONE;
@@ -19,64 +71,12 @@ class MonkeyBonanza {
   monkeyXTarget = 0;
   monkeyYTarget = 0;
   currentLevel = 0;
-  pathwayGroups = [
-    [
-      function circleBottom(x) {
-        let radius = 100;
-        let centerX = width / 2; // Calculate the center x-coordinate
-        let centerY = height / 2;
-        let deltaX = x - centerX; // Find the horizontal distance from the center
-
-        // Check if the x-coordinate is within the circle's diameter
-        if (Math.abs(deltaX) > radius) {
-          return null; // The point is outside the circle
-        }
-
-        // Calculate the y-coordinate relative to the center of the screen
-        return centerY + Math.sqrt(radius * radius - deltaX * deltaX);
-      },
-      function circleTop(x) {
-        let radius = 100;
-        let centerX = width / 2; // Calculate the center x-coordinate
-        let centerY = height / 2;
-        let deltaX = x - centerX; // Find the horizontal distance from the center
-
-        // Check if the x-coordinate is within the circle's diameter
-        if (Math.abs(deltaX) > radius) {
-          return null; // The point is outside the circle
-        }
-
-        // Calculate the y-coordinate for the top half of the circle
-        return centerY - Math.sqrt(radius * radius - deltaX * deltaX);
-      },
-    ],
-    [
-      function zigzagPath(x) {
-        return (
-          height / 2 -
-          50 -
-          100 * sin((x - (width / 2 - 150)) / 25) +
-          10 * sin((x - (width / 2 - 150)) / 12)
-        );
-      },
-    ],
-    [
-      function straightPath(x) {
-        return height / 2 + 50;
-      },
-    ],
-    [
-      function curvePath(x) {
-        return height / 2 + 100 + 30 * sin((x - (width / 2 - 150)) / 30);
-      },
-    ],
-  ];
   errorCount = 0;
   pathColor = "#FF0000";
   isMonkeyTouched = false;
   bananaPositions = [];
   score = 0;
-  currentPathwayGroup = () => this.pathwayGroups[this.currentLevel];
+  currentPathwayGroup = () => PATHWAY_GROUPS[this.currentLevel];
 
   constructor() {
     this.bananaPositions = this.generateBananas();

@@ -14,7 +14,6 @@ class MonkeyBonanza {
   monkeyX;
   monkeyY;
   pathwayIndex = 0;
-  noCursor = true;
   pathways = [];
   errorCount = 0;
 
@@ -26,20 +25,19 @@ class MonkeyBonanza {
 
   draw() {
     background(BACKGROUND_FOREST);
-    this.drawPathways();
 
     this.monkeyX = mouseX;
     this.monkeyY = mouseY;
 
+    this.drawPathways();
     this.checkIfTracing();
-
     this.drawMonkey();
   }
 
   drawPathway(pathFunction) {
-    // Draw the pathway on the canvas for visual reference
-    stroke(0);
-    strokeWeight(2);
+    fill("#00000000");
+    stroke("red");
+    strokeWeight(10);
     beginShape();
     for (let i = 0; i < width; i++) {
       let y = pathFunction(i);
@@ -86,7 +84,7 @@ class MonkeyBonanza {
     return (
       height / 2 -
       50 -
-      10 * sin((x - (width / 2 - 150)) / 25) +
+      100 * sin((x - (width / 2 - 150)) / 25) +
       10 * sin((x - (width / 2 - 150)) / 12)
     );
   }

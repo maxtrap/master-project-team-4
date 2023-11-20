@@ -1,8 +1,8 @@
+const traceThreshold = 10;
+
 let MONKEY_IMAGE;
 let BACKGROUND_FOREST;
 let BANANA_IMAGE;
-let PATHWAYS = [];
-let ERROR_COUNT = 0;
 
 function monkeyBonanzaPreload() {
   MONKEY_IMAGE = loadImage("resources/MonkeyVine.jpg");
@@ -15,37 +15,20 @@ class MonkeyBonanza {
   monkeyY;
   pathwayIndex = 0;
   noCursor = true;
+  pathways = [];
+  errorCount = 0;
 
   constructor() {
     this.monkeyX = width / 2;
     this.monkeyY = height / 2;
-    this.initializePathways();
-  }
-
-  initializePathways() {
-    PATHWAYS.push(this.zigzagPath, this.straightPath, this.curvePath);
+    this.pathways.push(this.zigzagPath, this.straightPath, this.curvePath);
   }
 
   draw() {
     background(BACKGROUND_FOREST);
-
-    // Draw the predefined pathways
-    for (let i = 0; i < PATHWAYS.length; i++) {
-      this.drawPathway(PATHWAYS[i]);
-    }
-
-    // Draw the monkey image at the mouse position
-    image(MONKEY_IMAGE, mouseX, mouseY, 50, 50);
-
-    // Check if the user is tracing the current pathway
-    if (this.isWithinThreshold(mouseX, mouseY, PATHWAYS[this.pathwayIndex])) {
-      // Move the monkey along the pathway
-      this.monkeyX = mouseX;
-      this.monkeyY = PATHWAYS[this.pathwayIndex](mouseX);
-    } else {
-      // Count an error if the monkey deviates from the pathway
-      ERROR_COUNT++;
-    }
+    this.drawPathways();
+    this.drawMonkey();
+    this.checkIfTracing();
   }
 
   drawPathway(pathFunction) {
@@ -60,12 +43,35 @@ class MonkeyBonanza {
     endShape();
   }
 
+  drawPathways() {
+    for (let i = 0; i < this.pathways.length; i++) {
+      this.drawPathway(this.pathways[i]);
+    }
+  }
+
+  drawMonkey() {
+    // Draw the monkey image at the mouse position
+    image(MONKEY_IMAGE, mouseX, mouseY, 50, 50);
+  }
+
+  checkIfTracing() {
+    if (
+      this.isWithinThreshold(mouseX, mouseY, this.pathways[this.pathwayIndex])
+    ) {
+      // Move the monkey along the pathway
+      this.monkeyX = mouseX;
+      this.monkeyY = this.pathways[this.pathwayIndex](mouseX);
+    } else {
+      // Count an error if the monkey deviates from the pathway
+      this.errorCount++;
+    }
+  }
+
   isWithinThreshold(x, y, pathFunction) {
-    const threshold = 10;
     for (let i = 0; i < width; i++) {
       let pathX = i;
       let pathY = pathFunction(i);
-      if (dist(x, y, pathX, pathY) < threshold) {
+      if (dist(x, y, pathX, pathY) < traceThreshold) {
         return true;
       }
     }

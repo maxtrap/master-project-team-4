@@ -49,7 +49,7 @@ function fontPreload() {
   loadFont("resources/Pixeboy.ttf", () => console.log("loaded pixeboy"));
 }
 
-function drawUI() {
+function drawUIElements() {
   textFont(defaultFont);
   currentSceneUIElements.forEach((element) => element.draw());
 }
@@ -82,4 +82,32 @@ function togglePause() {
     if (!currentScene.noLoop) loop();
     pauseMenu.style("display", "none");
   }
+}
+
+function drawLevelIndicator(level) {
+  let levelString = `Level ${level}`;
+  textSize(64);
+  let levelTextWidth = textWidth(levelString);
+
+  push();
+  strokeWeight(3);
+  stroke(0);
+  rectMode(CORNER);
+  fill(secondaryShade + "c8");
+  rect(
+    width - levelTextWidth - 55,
+    -10,
+    textWidth(levelString) + 55,
+    110,
+    0,
+    0,
+    0,
+    20,
+  );
+  pop();
+
+  fill(0);
+  strokeWeight(0);
+  textAlign(LEFT);
+  text(levelString, width - levelTextWidth - 20, 70);
 }

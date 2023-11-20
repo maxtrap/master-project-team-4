@@ -110,7 +110,7 @@ class FairytaleTapper {
     background(getBackground(this.level));
     this.drawScore();
     this.drawTimer();
-    this.drawLevelIndicator();
+    drawLevelIndicator(this.level);
 
     //Draws falling score texts. Its the little +1s that pop out from the score when you click
     for (let i = 0; i < this.scoreFallingTexts.length; i++) {
@@ -173,25 +173,6 @@ class FairytaleTapper {
     if (this.time <= 0) {
       this.loseGame();
     }
-  }
-
-  drawLevelIndicator() {
-    let levelString = `Level ${this.level}`;
-    textSize(64);
-    let levelTextWidth = textWidth(levelString);
-
-    push();
-    strokeWeight(3);
-    stroke(0);
-    rectMode(CORNER);
-    fill(secondaryShade + "c8")
-    rect(width - levelTextWidth - 55,-10,textWidth(levelString) + 55,110,
-      0,0,0,20);
-    pop();
-
-    fill(0);
-    textAlign(LEFT);
-    text(levelString, width - levelTextWidth - 20, 70);
   }
 
   addScore() {

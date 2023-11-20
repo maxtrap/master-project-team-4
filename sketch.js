@@ -15,7 +15,7 @@ function setup() {
 
 function draw() {
   currentScene.draw();
-  drawUI();
+  drawUIElements();
 }
 
 function windowResized() {

@@ -50,6 +50,7 @@ class MonkeyBonanza {
     this.checkIfTracing();
     this.drawPathway(this.pathways[this.currentLevel]);
     this.drawMonkey();
+    drawLevelIndicator(this.currentLevel);
   }
 
   drawPathway(pathFunction) {

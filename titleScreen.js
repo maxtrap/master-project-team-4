@@ -9,6 +9,8 @@ class TitleScreen {
   draw() {
     clear();
     fill(250, 235, 215);
+    stroke("black");
+    strokeWeight(2);
     scribble.scribbleEllipse(width / 2, 150, 255, 300);
   }
 

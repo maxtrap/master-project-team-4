@@ -11,6 +11,10 @@ var pauseMenu;
 var pauseMenuDisplay = () => pauseMenu.style("display");
 
 function setScene(sceneFactory) {
+  // reset drawing stuff
+  fill("#00000000");
+  stroke("#00000000");
+
   // clear clickable arrays
   clearClickables();
   clearMissables();

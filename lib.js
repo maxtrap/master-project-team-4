@@ -7,6 +7,8 @@ const secondaryShade = "#0cb277";
 var scribble = new Scribble();
 var currentScene;
 var currentSceneUIElements = [];
+var pauseMenu;
+var pauseMenuDisplay = () => pauseMenu.style("display");
 
 function setScene(sceneFactory) {
   // clear clickable arrays
@@ -27,6 +29,12 @@ function setScene(sceneFactory) {
     noLoop();
   } else {
     frameRate(currentScene.frameRate || 60);
+  }
+
+  if (currentScene.noCursor) {
+    noCursor();
+  } else {
+    cursor();
   }
 
   // play music
@@ -62,8 +70,7 @@ function updateUIElementText(index, text) {
 }
 
 function togglePause() {
-  var pauseMenu = select("#pauseMenu");
-  if (pauseMenu.style("display") === "none") {
+  if (pauseMenuDisplay() === "none") {
     if (currentScene instanceof TitleScreen) return;
     if (!currentScene.noLoop) noLoop();
     pauseMenu.style("display", "flex");

@@ -216,8 +216,7 @@ class GeckoClimber {
       this.geckoX = this.fromX + eased * this.lerpDX;
       this.geckoY = this.fromY + eased * this.lerpDY;
     }
-
-    console.log(this.movementIndex);
+    
   }
 
   typingSection() {
@@ -293,7 +292,6 @@ class GeckoClimber {
       this.toBeTyped = TYPING_DATA.getColumn(LEVEL_DIFFICULTY[this.level])[
         Math.floor(Math.random() * 26)
       ];
-      console.log("Next Level");
     }
   }
 

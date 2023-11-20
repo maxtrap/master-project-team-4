@@ -3,13 +3,13 @@ const LERP_AMOUNT = 0.2;
 const MONKEY_SIZE = 150;
 
 let MONKEY_IMAGE;
-let BACKGROUND_FOREST;
+let BACKGROUND_ONE;
 let BANANA_IMAGE;
 
 function monkeyBonanzaPreload() {
   MONKEY_IMAGE = loadImage("resources/Monkey.png");
-  BACKGROUND_FOREST = loadImage("resources/Rainforest.jpeg");
-  BANANA_IMAGE = loadImage("resources/Rainforest.jpeg");
+  BACKGROUND_ONE = loadImage("resources/Jungle.png");
+  // BANANA_IMAGE = loadImage("resources/Rainforest.jpeg");
 }
 
 class MonkeyBonanza {
@@ -29,7 +29,7 @@ class MonkeyBonanza {
   }
 
   draw() {
-    background(BACKGROUND_FOREST);
+    background(BACKGROUND_ONE);
 
     this.monkeyXTarget = mouseX;
     this.monkeyYTarget = mouseY;

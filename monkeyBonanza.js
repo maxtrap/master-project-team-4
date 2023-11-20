@@ -72,6 +72,7 @@ class MonkeyBonanza {
   ];
   errorCount = 0;
   pathColor = "#FF0000";
+  isMonkeyTouched = false;
   currentPathwayGroup = () => this.pathwayGroups[this.currentLevel];
 
   constructor() {
@@ -80,18 +81,34 @@ class MonkeyBonanza {
 
   draw() {
     background(BACKGROUND_ONE);
+    if (!this.isMonkeyTouched) {
+      this.monkeyXTarget = 0 + MONKEY_SIZE / 2;
+      this.monkeyYTarget = height / 2;
+      this.checkIfTouchingMonkey();
+      this.drawMonkey();
 
-    this.monkeyXTarget = mouseX;
-    this.monkeyYTarget = mouseY;
+      // Draw p5js text in the center of the screen saying "Touch the monkey!"
+      push();
+      stroke(0);
+      strokeWeight(5);
+      fill(secondaryShade);
+      textSize(84);
+      textAlign(CENTER, CENTER);
+      text("Touch the monkey!", width / 2, height / 2);
+      pop();
+    } else {
+      this.monkeyXTarget = mouseX;
+      this.monkeyYTarget = mouseY;
 
-    this.checkIfTracing();
+      this.checkIfTracing();
 
-    for (let i = 0; i < this.currentPathwayGroup().length; i++) {
-      this.drawPathway(this.currentPathwayGroup()[i]);
+      for (let i = 0; i < this.currentPathwayGroup().length; i++) {
+        this.drawPathway(this.currentPathwayGroup()[i]);
+      }
+
+      this.drawMonkey();
+      drawLevelIndicator(this.currentLevel + 1);
     }
-
-    this.drawMonkey();
-    drawLevelIndicator(this.currentLevel + 1);
   }
 
   drawPathway(pathFunction) {
@@ -157,6 +174,12 @@ class MonkeyBonanza {
       }
     }
     return false;
+  }
+
+  checkIfTouchingMonkey() {
+    if (dist(mouseX, mouseY, this.monkeyX, this.monkeyY) < MONKEY_SIZE / 2) {
+      this.isMonkeyTouched = true;
+    }
   }
 
   spawnBananas() {}

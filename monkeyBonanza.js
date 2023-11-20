@@ -1,4 +1,4 @@
-const TRACE_THRESHOLD = 20;
+const TRACE_THRESHOLD = 30;
 const LERP_AMOUNT = 0.2;
 const MONKEY_SIZE = 150;
 
@@ -20,6 +20,7 @@ class MonkeyBonanza {
   pathwayIndex = 0;
   pathways = [];
   errorCount = 0;
+  pathColor = "#FF0000";
 
   constructor() {
     this.monkeyX = width / 2;
@@ -33,14 +34,14 @@ class MonkeyBonanza {
     this.monkeyXTarget = mouseX;
     this.monkeyYTarget = mouseY;
 
-    this.drawPathways();
     this.checkIfTracing();
+    this.drawPathway(this.pathways[i]);
     this.drawMonkey();
   }
 
   drawPathway(pathFunction) {
     fill("#00000000");
-    stroke("red");
+    stroke(this.pathColor);
     strokeWeight(10);
     beginShape();
     for (let i = 0; i < width; i++) {
@@ -48,12 +49,6 @@ class MonkeyBonanza {
       vertex(i, y);
     }
     endShape();
-  }
-
-  drawPathways() {
-    for (let i = 0; i < this.pathways.length; i++) {
-      this.drawPathway(this.pathways[i]);
-    }
   }
 
   drawMonkey() {
@@ -72,10 +67,14 @@ class MonkeyBonanza {
     if (
       this.isWithinThreshold(mouseX, mouseY, this.pathways[this.pathwayIndex])
     ) {
+      this.pathColor = "#00FF00";
+
       // Move the monkey along the pathway
       this.monkeyXTarget = mouseX;
       this.monkeyYTarget = this.pathways[this.pathwayIndex](mouseX);
     } else {
+      this.pathColor = "#FF0000";
+
       // Count an error if the monkey deviates from the pathway
       this.errorCount++;
     }

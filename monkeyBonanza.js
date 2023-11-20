@@ -35,7 +35,7 @@ class MonkeyBonanza {
     this.monkeyYTarget = mouseY;
 
     this.checkIfTracing();
-    this.drawPathway(this.pathways[i]);
+    this.drawPathway(this.pathways[this.pathwayIndex]);
     this.drawMonkey();
   }
 

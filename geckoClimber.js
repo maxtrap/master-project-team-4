@@ -91,7 +91,7 @@ class GeckoClimber {
     this.input = createInput();
     this.input.style("font-size", "30px");
     this.input.style("border-color", "white");
-    this.input.position(windowWidth / 2.55, 700);
+    this.input.position(windowWidth / 2.55, height - 100);
     this.input.size(400);
     textAlign(CENTER);
     textSize(25);

@@ -111,3 +111,21 @@ function drawLevelIndicator(level) {
   textAlign(LEFT);
   text(levelString, width - levelTextWidth - 20, 70);
 }
+
+function drawScore(score, scoreMax) {
+  let scoreString = `Score: ${score}`;
+  if (scoreMax !== 0) scoreString += `/${scoreMax}`;
+  textSize(64);
+
+  push();
+  strokeWeight(3);
+  stroke(0);
+  rectMode(CORNER);
+  fill(secondaryShade + "c8");
+  rect(-10, -10, textWidth(scoreString) + 55, 110, 0, 0, 20, 0);
+  pop();
+
+  fill(0);
+  textAlign(LEFT);
+  text(scoreString, 20, 70);
+}

@@ -108,7 +108,7 @@ class FairytaleTapper {
 
   draw() {
     background(getBackground(this.level));
-    this.drawScore();
+    drawScore(this.score, SCORE_GOAL);
     this.drawTimer();
     drawLevelIndicator(this.level);
 
@@ -130,23 +130,6 @@ class FairytaleTapper {
         i--;
       }
     }
-  }
-
-  drawScore() {
-    let scoreString = `Score: ${this.score}/${SCORE_GOAL}`;
-    textSize(64);
-
-    push();
-    strokeWeight(3);
-    stroke(0);
-    rectMode(CORNER);
-    fill(secondaryShade + "c8");
-    rect(-10, -10, textWidth(scoreString) + 55, 110, 0, 0, 20, 0);
-    pop();
-
-    fill(0);
-    textAlign(LEFT);
-    text(scoreString, 20, 70);
   }
 
   drawTimer() {

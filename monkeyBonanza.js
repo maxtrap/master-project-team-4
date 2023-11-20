@@ -114,6 +114,7 @@ class MonkeyBonanza {
 
       this.drawMonkey();
       drawLevelIndicator(this.level + 1);
+      drawScore(this.score);
     }
   }
 

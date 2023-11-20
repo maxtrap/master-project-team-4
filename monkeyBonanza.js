@@ -75,6 +75,7 @@ class MonkeyBonanza {
   pathColor = "#FF0000";
   isMonkeyTouched = false;
   bananaPositions = [];
+  score = 0;
   currentPathwayGroup = () => this.pathwayGroups[this.currentLevel];
 
   constructor() {
@@ -103,6 +104,7 @@ class MonkeyBonanza {
       this.monkeyYTarget = mouseY;
 
       this.checkIfTracing();
+      this.checkIfTouchingBanana();
 
       for (let i = 0; i < this.currentPathwayGroup().length; i++) {
         this.drawPathway(this.currentPathwayGroup()[i]);
@@ -166,6 +168,24 @@ class MonkeyBonanza {
     }
     this.pathColor = "#FF0000";
     this.errorCount++;
+  }
+
+  checkIfTouchingBanana() {
+    for (let i = 0; i < this.bananaPositions.length; i++) {
+      if (
+        dist(
+          this.monkeyX,
+          this.monkeyY,
+          this.bananaPositions[i][0],
+          this.bananaPositions[i][1],
+        ) <
+        BANANA_SIZE / 2
+      ) {
+        this.bananaPositions.splice(i, 1);
+        this.score++;
+        break;
+      }
+    }
   }
 
   isWithinThreshold(x, y, pathFunction) {

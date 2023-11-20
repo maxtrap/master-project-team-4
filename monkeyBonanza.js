@@ -1,4 +1,5 @@
-const traceThreshold = 10;
+const traceThreshold = 20;
+const lerpAmount = 0.2;
 
 let MONKEY_IMAGE;
 let BACKGROUND_FOREST;
@@ -11,8 +12,10 @@ function monkeyBonanzaPreload() {
 }
 
 class MonkeyBonanza {
-  monkeyX;
-  monkeyY;
+  monkeyX = 0;
+  monkeyY = 0;
+  monkeyXTarget = 0;
+  monkeyYTarget = 0;
   pathwayIndex = 0;
   pathways = [];
   errorCount = 0;
@@ -26,8 +29,8 @@ class MonkeyBonanza {
   draw() {
     background(BACKGROUND_FOREST);
 
-    this.monkeyX = mouseX;
-    this.monkeyY = mouseY;
+    this.monkeyXTarget = mouseX;
+    this.monkeyYTarget = mouseY;
 
     this.drawPathways();
     this.checkIfTracing();
@@ -53,6 +56,8 @@ class MonkeyBonanza {
   }
 
   drawMonkey() {
+    this.monkeyX = lerp(this.monkeyX, this.monkeyXTarget, lerpAmount);
+    this.monkeyY = lerp(this.monkeyY, this.monkeyYTarget, lerpAmount);
     image(MONKEY_IMAGE, this.monkeyX, this.monkeyY, 50, 50);
   }
 
@@ -61,8 +66,8 @@ class MonkeyBonanza {
       this.isWithinThreshold(mouseX, mouseY, this.pathways[this.pathwayIndex])
     ) {
       // Move the monkey along the pathway
-      this.monkeyX = mouseX;
-      this.monkeyY = this.pathways[this.pathwayIndex](mouseX);
+      this.monkeyXTarget = mouseX;
+      this.monkeyYTarget = this.pathways[this.pathwayIndex](mouseX);
     } else {
       // Count an error if the monkey deviates from the pathway
       this.errorCount++;

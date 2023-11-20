@@ -75,6 +75,7 @@ class MonkeyBonanza {
   pathColor = "#FF0000";
   isMonkeyTouched = false;
   bananaPositions = [];
+  totalBananas = 0;
   score = 0;
   currentPathwayGroup = () => PATHWAY_GROUPS[this.level];
 
@@ -115,8 +116,9 @@ class MonkeyBonanza {
       this.drawBananas();
 
       this.drawMonkey();
-      drawLevelIndicator(this.level + 1);
       drawScore(this.score);
+      this.drawBananaIndicator();
+      drawLevelIndicator(this.level + 1);
     }
   }
 
@@ -242,6 +244,7 @@ class MonkeyBonanza {
         }
       }
     }
+    this.totalBananas = bananaPositions.length;
     return bananaPositions;
   }
 
@@ -255,5 +258,35 @@ class MonkeyBonanza {
         BANANA_SIZE,
       );
     }
+  }
+
+  drawBananaIndicator() {
+    let indicatorHeight = 100;
+    let indicatorText = `Got ${
+      this.totalBananas - this.bananaPositions.length
+    } out of ${this.totalBananas} bananas`;
+    push();
+    strokeWeight(3);
+    stroke(0);
+    fill(secondaryShade + "c8");
+    rectMode(CENTER);
+    rect(
+      width / 2,
+      50,
+      textWidth(indicatorText),
+      indicatorHeight,
+      0,
+      0,
+      20,
+      20,
+    );
+    pop();
+
+    textSize(48);
+    fill(0);
+    strokeWeight(0);
+    textAlign(CENTER);
+
+    text(indicatorText, width / 2, 60);
   }
 }

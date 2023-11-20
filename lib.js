@@ -126,6 +126,7 @@ function drawScore(score, scoreMax = 0) {
   pop();
 
   fill(0);
+  strokeWeight(0);
   textAlign(LEFT);
   text(scoreString, 20, 70);
 }

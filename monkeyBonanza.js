@@ -18,7 +18,7 @@ class MonkeyBonanza {
   monkeyXTarget = 0;
   monkeyYTarget = 0;
   currentLevel = 0;
-  pathways = [
+  pathwayGroups = [
     [
       function circleBottom(x) {
         let radius = 100;
@@ -72,7 +72,7 @@ class MonkeyBonanza {
   ];
   errorCount = 0;
   pathColor = "#FF0000";
-  currentPathwayGroup = () => this.pathways[this.currentLevel];
+  currentPathwayGroup = () => this.pathwayGroups[this.currentLevel];
 
   constructor() {
     this.spawnBananas();

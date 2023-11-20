@@ -1,12 +1,13 @@
-const traceThreshold = 20;
-const lerpAmount = 0.2;
+const TRACE_THRESHOLD = 20;
+const LERP_AMOUNT = 0.2;
+const MONKEY_SIZE = 150;
 
 let MONKEY_IMAGE;
 let BACKGROUND_FOREST;
 let BANANA_IMAGE;
 
 function monkeyBonanzaPreload() {
-  MONKEY_IMAGE = loadImage("resources/MonkeyVine.jpg");
+  MONKEY_IMAGE = loadImage("resources/Monkey.png");
   BACKGROUND_FOREST = loadImage("resources/Rainforest.jpeg");
   BANANA_IMAGE = loadImage("resources/Rainforest.jpeg");
 }
@@ -56,9 +57,15 @@ class MonkeyBonanza {
   }
 
   drawMonkey() {
-    this.monkeyX = lerp(this.monkeyX, this.monkeyXTarget, lerpAmount);
-    this.monkeyY = lerp(this.monkeyY, this.monkeyYTarget, lerpAmount);
-    image(MONKEY_IMAGE, this.monkeyX, this.monkeyY, 50, 50);
+    this.monkeyX = lerp(this.monkeyX, this.monkeyXTarget, LERP_AMOUNT);
+    this.monkeyY = lerp(this.monkeyY, this.monkeyYTarget, LERP_AMOUNT);
+    image(
+      MONKEY_IMAGE,
+      this.monkeyX - MONKEY_SIZE / 2,
+      this.monkeyY - MONKEY_SIZE / 2,
+      MONKEY_SIZE,
+      MONKEY_SIZE,
+    );
   }
 
   checkIfTracing() {
@@ -78,7 +85,7 @@ class MonkeyBonanza {
     for (let i = 0; i < width; i++) {
       let pathX = i;
       let pathY = pathFunction(i);
-      if (dist(x, y, pathX, pathY) < traceThreshold) {
+      if (dist(x, y, pathX, pathY) < TRACE_THRESHOLD) {
         return true;
       }
     }

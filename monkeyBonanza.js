@@ -91,6 +91,9 @@ class MonkeyBonanza {
   constructor(level = 0) {
     this.level = level;
     this.bananaPositions = this.generateBananaPositions();
+
+    this.generateEndscreenButtons();
+    
   }
 
   draw() {
@@ -108,6 +111,7 @@ class MonkeyBonanza {
       if (this.bananaPositions.length === 0) {
         if (this.level === PATHWAY_GROUPS.length - 1) {
           this.drawNotify(`You win! Cumulative score: ${this.score}`);
+          this.drawButtons();
           return;
         } else {
           this.level++;
@@ -176,6 +180,48 @@ class MonkeyBonanza {
     textAlign(CENTER, CENTER);
     text(notification, width / 2, height / 2);
     pop();
+  }
+
+  generateEndscreenButtons() {
+    this.playAgain = new Clickable();
+
+    this.playAgain.textSize = 55;
+    // this.playAgain.textScaled = true;
+
+    this.playAgain.locate(width / 2 - 325, height / 2 + 100);
+    this.playAgain.resize(300, 100);
+
+    this.playAgain.text = "Play Again"
+    this.playAgain.color = secondaryShade;
+    this.playAgain.cornerRadius = 20;
+    this.playAgain.strokeWeight = 2;
+
+    this.playAgain.onPress = () => setScene(() => new MonkeyBonanza());
+    this.playAgain.textFont = defaultFont;
+
+
+
+
+    this.homeButton = new Clickable();
+
+    this.homeButton.textSize = 55;
+    // this.playAgain.textScaled = true;
+
+    this.homeButton.locate(width / 2 + 25, height / 2 + 100);
+    this.homeButton.resize(300, 100);
+
+    this.homeButton.text = "Home"
+    this.homeButton.color = secondaryShade;
+    this.homeButton.cornerRadius = 20;
+    this.homeButton.strokeWeight = 2;
+
+    this.homeButton.onPress = () => setScene(() => new TitleScreen());
+    this.homeButton.textFont = defaultFont;
+  }
+
+  drawButtons() {
+    this.playAgain.draw();
+    this.homeButton.draw();
   }
 
   checkIfTracing() {

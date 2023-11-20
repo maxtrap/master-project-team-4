@@ -3,14 +3,36 @@ const LERP_AMOUNT = 0.2;
 const MONKEY_SIZE = 150;
 const BANANA_SIZE = 75;
 const PATHWAY_GROUPS = [
+  // [
+  //   function zigzagPath(x) {
+  //     let amplitude = 50; // Height of each zigzag segment
+  //     let period = 100; // Width of each zigzag segment
+
+  //     let segment = Math.floor((x - (width / 2 - period / 2)) / period); // Determine the current segment
+  //     let localX = x - segment * period; // x-coordinate within the current segment
+
+  //     if (segment % 2 === 0) {
+  //       // For even segments, the line goes up
+  //       return height / 2 - (localX / period) * amplitude;
+  //     } else {
+  //       // For odd segments, the line goes down
+  //       return height / 2 - amplitude + (localX / period) * amplitude;
+  //     }
+  //   },
+  // ],
   [
     function wave(x) {
       return height / 2 + 50 * Math.sin((x - width / 2) / 50);
     },
   ],
   [
+    function wave(x) {
+      return height / 2 + 200 * Math.sin((x - width / 2) / 50);
+    },
+  ],
+  [
     function circleBottom(x) {
-      let radius = 250;
+      let radius = 300;
       let centerX = width / 2; // Calculate the center x-coordinate
       let centerY = height / 2;
       let deltaX = x - centerX; // Find the horizontal distance from the center
@@ -24,7 +46,7 @@ const PATHWAY_GROUPS = [
       return centerY + Math.sqrt(radius * radius - deltaX * deltaX);
     },
     function circleTop(x) {
-      let radius = 250;
+      let radius = 300;
       let centerX = width / 2; // Calculate the center x-coordinate
       let centerY = height / 2;
       let deltaX = x - centerX; // Find the horizontal distance from the center

@@ -27,8 +27,13 @@ class MonkeyBonanza {
   draw() {
     background(BACKGROUND_FOREST);
     this.drawPathways();
-    this.drawMonkey();
+
+    this.monkeyX = mouseX;
+    this.monkeyY = mouseY;
+
     this.checkIfTracing();
+
+    this.drawMonkey();
   }
 
   drawPathway(pathFunction) {
@@ -50,8 +55,7 @@ class MonkeyBonanza {
   }
 
   drawMonkey() {
-    // Draw the monkey image at the mouse position
-    image(MONKEY_IMAGE, mouseX, mouseY, 50, 50);
+    image(MONKEY_IMAGE, this.monkeyX, this.monkeyY, 50, 50);
   }
 
   checkIfTracing() {

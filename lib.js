@@ -29,6 +29,12 @@ function setScene(sceneFactory) {
     frameRate(currentScene.frameRate || 60);
   }
 
+  if (currentScene.noCursor) {
+    noCursor();
+  } else {
+    cursor();
+  }
+
   // play music
   playMusic();
 }

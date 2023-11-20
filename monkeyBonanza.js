@@ -14,6 +14,7 @@ class MonkeyBonanza {
   monkeyX;
   monkeyY;
   pathwayIndex = 0;
+  noCursor = true;
 
   constructor() {
     this.monkeyX = width / 2;
@@ -86,9 +87,5 @@ class MonkeyBonanza {
 
   curvePath(x) {
     return height / 2 + 100 + 30 * sin((x - (width / 2 - 150)) / 30);
-  }
-
-  getErrorCount() {
-    return ERROR_COUNT;
   }
 }

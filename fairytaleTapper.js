@@ -1,5 +1,5 @@
 const GAME_LENGTH = 60;
-const SCORE_GOAL = 20;
+const SCORE_GOAL = 10;
 
 const RANDOM_INTERVAL_LOW = 1;
 const RANDOM_INTERVAL_HIGH = 2;
@@ -140,7 +140,7 @@ class FairytaleTapper {
     strokeWeight(3);
     stroke(0);
     rectMode(CORNER);
-    fill(secondaryShade + "c8")
+    fill(secondaryShade + "c8");
     rect(-10, -10, textWidth(scoreString) + 55, 110, 0, 0, 20, 0);
     pop();
 
@@ -159,7 +159,7 @@ class FairytaleTapper {
     push();
     strokeWeight(3);
     stroke(0);
-    fill(secondaryShade + "c8")
+    fill(secondaryShade + "c8");
     rectMode(CENTER);
     rect(width / 2, 50, 262, TIMER_HEIGHT, 0, 0, 20, 20);
     pop();

@@ -78,8 +78,9 @@ class MonkeyBonanza {
   score = 0;
   currentPathwayGroup = () => PATHWAY_GROUPS[this.currentLevel];
 
-  constructor() {
-    this.bananaPositions = this.generateBananas();
+  constructor(level = 0) {
+    this.level = level;
+    this.bananaPositions = this.generateBananaPositions();
   }
 
   draw() {
@@ -87,7 +88,7 @@ class MonkeyBonanza {
     if (!this.isMonkeyTouched) {
       this.monkeyXTarget = 0 + MONKEY_SIZE / 2;
       this.monkeyYTarget = height / 2;
-      this.checkIfTouchingMonkey();
+      this.checkIfMouseTouchingMonkey();
       this.drawMonkey();
 
       // Draw p5js text in the center of the screen saying "Touch the monkey!"
@@ -104,7 +105,7 @@ class MonkeyBonanza {
       this.monkeyYTarget = mouseY;
 
       this.checkIfTracing();
-      this.checkIfTouchingBanana();
+      this.checkIfMonkeyTouchingBanana();
 
       for (let i = 0; i < this.currentPathwayGroup().length; i++) {
         this.drawPathway(this.currentPathwayGroup()[i]);
@@ -154,9 +155,7 @@ class MonkeyBonanza {
 
   checkIfTracing() {
     for (let i = 0; i < this.currentPathwayGroup().length; i++) {
-      if (
-        this.isWithinThreshold(mouseX, mouseY, this.currentPathwayGroup()[i])
-      ) {
+      if (this.isPosWithinPath(mouseX, mouseY, this.currentPathwayGroup()[i])) {
         this.pathColor = "#00FF00";
 
         // Move the monkey along the pathway
@@ -170,7 +169,7 @@ class MonkeyBonanza {
     this.errorCount++;
   }
 
-  checkIfTouchingBanana() {
+  checkIfMonkeyTouchingBanana() {
     for (let i = 0; i < this.bananaPositions.length; i++) {
       if (
         dist(
@@ -188,7 +187,7 @@ class MonkeyBonanza {
     }
   }
 
-  isWithinThreshold(x, y, pathFunction) {
+  isPosWithinPath(x, y, pathFunction) {
     for (let i = 0; i < width; i++) {
       let pathX = i;
       let pathY = pathFunction(i);
@@ -199,14 +198,14 @@ class MonkeyBonanza {
     return false;
   }
 
-  checkIfTouchingMonkey() {
+  checkIfMouseTouchingMonkey() {
     if (dist(mouseX, mouseY, this.monkeyX, this.monkeyY) < MONKEY_SIZE / 2) {
       this.isMonkeyTouched = true;
     }
   }
 
   // return an array of x and y tuples for banana positions along currentPathwayGroup pathways
-  generateBananas() {
+  generateBananaPositions() {
     let bananaPositions = [];
     for (let i = 0; i < this.currentPathwayGroup().length; i++) {
       let pathway = this.currentPathwayGroup()[i];

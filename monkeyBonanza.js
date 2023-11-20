@@ -65,11 +65,13 @@ const PATHWAY_GROUPS = [
 let MONKEY_IMAGE;
 let BACKGROUND_ONE;
 let BANANA_IMAGE;
+let CHOMP;
 
 function monkeyBonanzaPreload() {
   MONKEY_IMAGE = loadImage("resources/Monkey.png");
   BACKGROUND_ONE = loadImage("resources/Jungle.png");
   BANANA_IMAGE = loadImage("resources/Banana.png");
+  CHOMP = loadSound("resources/chomp.mp3")
 }
 
 class MonkeyBonanza {
@@ -212,6 +214,7 @@ class MonkeyBonanza {
       ) {
         this.bananaPositions.splice(i, 1);
         this.score++;
+        CHOMP.play();
         break;
       }
     }

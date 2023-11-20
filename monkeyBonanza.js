@@ -70,13 +70,13 @@ class MonkeyBonanza {
   monkeyY = 0;
   monkeyXTarget = 0;
   monkeyYTarget = 0;
-  currentLevel = 0;
+  level = 0;
   errorCount = 0;
   pathColor = "#FF0000";
   isMonkeyTouched = false;
   bananaPositions = [];
   score = 0;
-  currentPathwayGroup = () => PATHWAY_GROUPS[this.currentLevel];
+  currentPathwayGroup = () => PATHWAY_GROUPS[this.level];
 
   constructor(level = 0) {
     this.level = level;
@@ -113,7 +113,7 @@ class MonkeyBonanza {
       this.drawBananas();
 
       this.drawMonkey();
-      drawLevelIndicator(this.currentLevel + 1);
+      drawLevelIndicator(this.level + 1);
     }
   }
 
@@ -155,12 +155,13 @@ class MonkeyBonanza {
 
   checkIfTracing() {
     for (let i = 0; i < this.currentPathwayGroup().length; i++) {
-      if (this.isPosWithinPath(mouseX, mouseY, this.currentPathwayGroup()[i])) {
+      let pathway = this.currentPathwayGroup()[i];
+      if (this.isPosWithinPath(mouseX, mouseY, pathway)) {
         this.pathColor = "#00FF00";
 
         // Move the monkey along the pathway
         this.monkeyXTarget = mouseX;
-        this.monkeyYTarget = this.currentPathwayGroup()[i](mouseX);
+        this.monkeyYTarget = pathway(mouseX) ?? mouseY;
 
         return;
       }
@@ -191,6 +192,7 @@ class MonkeyBonanza {
     for (let i = 0; i < width; i++) {
       let pathX = i;
       let pathY = pathFunction(i);
+      if (pathY === null) continue;
       if (dist(x, y, pathX, pathY) < TRACE_THRESHOLD) {
         return true;
       }

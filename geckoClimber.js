@@ -129,6 +129,10 @@ class GeckoClimber {
     this.geckoY = this.moveLocationYPositions[0];
   }
 
+  destructor() {
+    this.input.remove();
+  }
+
   // Check if CSV and Image is loaded: TEMPORARY
   processPreloads() {
     if (TYPING_DATA) {

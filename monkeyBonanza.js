@@ -1,6 +1,7 @@
 const TRACE_THRESHOLD = 30;
 const LERP_AMOUNT = 0.2;
 const MONKEY_SIZE = 150;
+const BANANA_SIZE = 75;
 
 let MONKEY_IMAGE;
 let BACKGROUND_ONE;
@@ -9,7 +10,7 @@ let BANANA_IMAGE;
 function monkeyBonanzaPreload() {
   MONKEY_IMAGE = loadImage("resources/Monkey.png");
   BACKGROUND_ONE = loadImage("resources/Jungle.png");
-  // BANANA_IMAGE = loadImage("resources/Rainforest.jpeg");
+  BANANA_IMAGE = loadImage("resources/Banana.png");
 }
 
 class MonkeyBonanza {
@@ -73,10 +74,11 @@ class MonkeyBonanza {
   errorCount = 0;
   pathColor = "#FF0000";
   isMonkeyTouched = false;
+  bananaPositions = [];
   currentPathwayGroup = () => this.pathwayGroups[this.currentLevel];
 
   constructor() {
-    this.spawnBananas();
+    this.bananaPositions = this.generateBananas();
   }
 
   draw() {
@@ -105,6 +107,7 @@ class MonkeyBonanza {
       for (let i = 0; i < this.currentPathwayGroup().length; i++) {
         this.drawPathway(this.currentPathwayGroup()[i]);
       }
+      this.drawBananas();
 
       this.drawMonkey();
       drawLevelIndicator(this.currentLevel + 1);
@@ -182,5 +185,33 @@ class MonkeyBonanza {
     }
   }
 
-  spawnBananas() {}
+  // return an array of x and y tuples for banana positions along currentPathwayGroup pathways
+  generateBananas() {
+    let bananaPositions = [];
+    for (let i = 0; i < this.currentPathwayGroup().length; i++) {
+      let pathway = this.currentPathwayGroup()[i];
+      for (let x = 0; x < width; x++) {
+        let y = pathway(x);
+        if (y === null) continue;
+
+        // small chance that a banana is spawned at this position on the pathway
+        if (Math.random() < 0.01) {
+          bananaPositions.push([x, y]);
+        }
+      }
+    }
+    return bananaPositions;
+  }
+
+  drawBananas() {
+    for (let i = 0; i < this.bananaPositions.length; i++) {
+      image(
+        BANANA_IMAGE,
+        this.bananaPositions[i][0] - BANANA_SIZE / 2,
+        this.bananaPositions[i][1] - BANANA_SIZE / 2,
+        BANANA_SIZE,
+        BANANA_SIZE,
+      );
+    }
+  }
 }

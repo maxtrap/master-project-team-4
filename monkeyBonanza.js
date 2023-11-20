@@ -86,23 +86,25 @@ class MonkeyBonanza {
   draw() {
     background(BACKGROUND_ONE);
     if (!this.isMonkeyTouched) {
-      this.monkeyXTarget = 0 + MONKEY_SIZE / 2;
-      this.monkeyYTarget = height / 2;
+      this.monkeyXTarget = this.monkeyX = 0 + MONKEY_SIZE / 2;
+      this.monkeyYTarget = this.monkeyY = height / 2;
       this.checkIfMouseTouchingMonkey();
       this.drawMonkey();
-
-      // Draw p5js text in the center of the screen saying "Touch the monkey!"
-      push();
-      stroke(0);
-      strokeWeight(5);
-      fill(secondaryShade);
-      textSize(84);
-      textAlign(CENTER, CENTER);
-      text("Touch the monkey!", width / 2, height / 2);
-      pop();
+      this.drawNotify("Touch the monkey!");
     } else {
       this.monkeyXTarget = mouseX;
       this.monkeyYTarget = mouseY;
+
+      if (this.bananaPositions.length === 0) {
+        if (this.level === PATHWAY_GROUPS.length - 1) {
+          this.drawNotify(`You win! Cumulative score: ${this.score}`);
+          return;
+        } else {
+          this.level++;
+          this.bananaPositions = this.generateBananaPositions();
+          this.isMonkeyTouched = false;
+        }
+      }
 
       this.checkIfTracing();
       this.checkIfMonkeyTouchingBanana();
@@ -152,6 +154,17 @@ class MonkeyBonanza {
       MONKEY_SIZE,
       MONKEY_SIZE,
     );
+  }
+
+  drawNotify(notification) {
+    push();
+    stroke(0);
+    strokeWeight(5);
+    fill(secondaryShade);
+    textSize(84);
+    textAlign(CENTER, CENTER);
+    text(notification, width / 2, height / 2);
+    pop();
   }
 
   checkIfTracing() {

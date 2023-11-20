@@ -41,6 +41,16 @@ class MonkeyBonanza {
 
   drawPathway(pathFunction) {
     fill("#00000000");
+
+    stroke("black");
+    strokeWeight(20);
+    beginShape();
+    for (let i = 0; i < width; i++) {
+      let y = pathFunction(i);
+      vertex(i, y);
+    }
+    endShape();
+
     stroke(this.pathColor);
     strokeWeight(10);
     beginShape();

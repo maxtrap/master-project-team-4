@@ -155,10 +155,10 @@ class GeckoClimber {
     rect(0, 0, width, height);
     strokeWeight(0);
     fill(FILL_COLOR[this.level]);
-    rect(15, 15, 300, 150);
+    rect(15, 15, 280, 130, 0 , 0, 30, 0);
     noFill();
     strokeWeight(15);
-    rect(0, 0, 315, 165, 30);
+    rect(0, 0, 295, 145, 0, 0, 30, 0);
     pop();
   }
 

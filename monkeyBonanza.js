@@ -17,15 +17,28 @@ class MonkeyBonanza {
   monkeyY = 0;
   monkeyXTarget = 0;
   monkeyYTarget = 0;
-  pathwayIndex = 0;
-  pathways = [];
+  currentLevel = 0;
+  pathways = [
+    function zigzagPath(x) {
+      return (
+        height / 2 -
+        50 -
+        100 * sin((x - (width / 2 - 150)) / 25) +
+        10 * sin((x - (width / 2 - 150)) / 12)
+      );
+    },
+    function straightPath(x) {
+      return height / 2 + 50;
+    },
+    function curvePath(x) {
+      return height / 2 + 100 + 30 * sin((x - (width / 2 - 150)) / 30);
+    },
+  ];
   errorCount = 0;
   pathColor = "#FF0000";
 
   constructor() {
-    this.monkeyX = width / 2;
-    this.monkeyY = height / 2;
-    this.pathways.push(this.zigzagPath, this.straightPath, this.curvePath);
+    this.spawnBananas();
   }
 
   draw() {
@@ -35,7 +48,7 @@ class MonkeyBonanza {
     this.monkeyYTarget = mouseY;
 
     this.checkIfTracing();
-    this.drawPathway(this.pathways[this.pathwayIndex]);
+    this.drawPathway(this.pathways[this.currentLevel]);
     this.drawMonkey();
   }
 
@@ -75,13 +88,13 @@ class MonkeyBonanza {
 
   checkIfTracing() {
     if (
-      this.isWithinThreshold(mouseX, mouseY, this.pathways[this.pathwayIndex])
+      this.isWithinThreshold(mouseX, mouseY, this.pathways[this.currentLevel])
     ) {
       this.pathColor = "#00FF00";
 
       // Move the monkey along the pathway
       this.monkeyXTarget = mouseX;
-      this.monkeyYTarget = this.pathways[this.pathwayIndex](mouseX);
+      this.monkeyYTarget = this.pathways[this.currentLevel](mouseX);
     } else {
       this.pathColor = "#FF0000";
 
@@ -101,20 +114,5 @@ class MonkeyBonanza {
     return false;
   }
 
-  zigzagPath(x) {
-    return (
-      height / 2 -
-      50 -
-      100 * sin((x - (width / 2 - 150)) / 25) +
-      10 * sin((x - (width / 2 - 150)) / 12)
-    );
-  }
-
-  straightPath(x) {
-    return height / 2 + 50;
-  }
-
-  curvePath(x) {
-    return height / 2 + 100 + 30 * sin((x - (width / 2 - 150)) / 30);
-  }
+  spawnBananas() {}
 }

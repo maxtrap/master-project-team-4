@@ -164,11 +164,18 @@ class MonkeyBonanza {
         this.monkeyXTarget = mouseX;
         this.monkeyYTarget = pathway(mouseX) ?? mouseY;
 
+        this.errorCount = 0;
+
         return;
       }
     }
     this.pathColor = "#FF0000";
     this.errorCount++;
+
+    if (this.errorCount >= 60) {
+      this.score--;
+      this.errorCount = 0;
+    }
   }
 
   checkIfMonkeyTouchingBanana() {

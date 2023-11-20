@@ -112,7 +112,7 @@ function drawLevelIndicator(level) {
   text(levelString, width - levelTextWidth - 20, 70);
 }
 
-function drawScore(score, scoreMax) {
+function drawScore(score, scoreMax = 0) {
   let scoreString = `Score: ${score}`;
   if (scoreMax !== 0) scoreString += `/${scoreMax}`;
   textSize(64);

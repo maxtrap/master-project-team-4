@@ -89,9 +89,10 @@ class GeckoClimber {
 
   constructor() {
     this.input = createInput();
+    this.inputY = height - 100;
     this.input.style("font-size", "30px");
     this.input.style("border-color", "white");
-    this.input.position(windowWidth / 2.55, 700);
+    this.input.position(windowWidth / 2.55, this.inputY);
     this.input.size(400);
     textAlign(CENTER);
     textSize(25);
@@ -185,7 +186,7 @@ class GeckoClimber {
     //Text that shows the user what to type and the border around the input box
     textSize(50);
     fill("white");
-    text("Type: " + this.toBeTyped, this.input.x + this.input.width / 2, 680);
+    text("Type: " + this.toBeTyped, this.input.x + this.input.width / 2, this.inputY - 20);
     fill("black");
     rect(
       this.input.x - this.borderRadius,

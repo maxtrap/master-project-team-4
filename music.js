@@ -8,7 +8,7 @@ function musicPreload() {
 
 //Sets music volume corresponding to the current scene
 function setVolume() {
-    if (currentScene instanceof FairytaleTapper) {
+    if (currentScene instanceof FairytaleTapper || currentScene instanceof GeckoClimber) {
         FT_BACKGROUND_MUSIC.setVolume(0.5);
     } else if (currentScene instanceof FairytaleEndScreen) {
         FT_BACKGROUND_MUSIC.setVolume(0.2)
@@ -19,6 +19,8 @@ function setVolume() {
 function getMusic() {
     if (currentScene instanceof FairytaleTapper || currentScene instanceof FairytaleEndScreen) {
         return FT_BACKGROUND_MUSIC;
+    } else if (currentScene instanceof GeckoClimber) {
+        return GECKO_BACKGROUND_MUSIC;
     }
     return null;
 }

@@ -17,7 +17,7 @@ function geckoClimberPreload() {
   STRUCTURE_LEVELTWO = loadImage("resources/Pyramids.png");
   BACKGROUND_LEVELTHREE = loadImage("resources/Wasteland.jpg");
   STRUCTURE_LEVELTHREE = loadImage("resources/volcano.png");
-  BACKGROUND_MUSIC = loadSound("resources/jungleMusic.mp3");
+  GECKO_BACKGROUND_MUSIC = loadSound("resources/jungleMusic.mp3");
   CORRECT_ANSWER = loadSound("resources/correctAnswer.mp3");
   INCORRECT_ANSWER = loadSound("resources/incorrectAnswer.mp3");
   BACKGROUNDS = [
@@ -88,7 +88,6 @@ class GeckoClimber {
   borderRadius = 5;
 
   constructor() {
-    BACKGROUND_MUSIC.loop();
     this.input = createInput();
     this.input.style("font-size", "30px");
     this.input.style("border-color", "white");
